@@ -3,6 +3,7 @@
 <head>
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Almarai:300,400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/animations.css">
     <script src="https://kit.fontawesome.com/d28e03a01a.js" crossorigin="anonymous"></script>
@@ -12,86 +13,89 @@
 
 <body>
     <div class="page-container">
-        <div class="content-wrapper">
-            <div id="name">
-                <h1>HI, I'M CAMERON MACDONALD</h1>
+        <div id="top" class="content-wrapper">
+            <div class="header">
+                <div class="name-header header-item">
+                    <a href="#top"><p>Cameron MacDonald</p></a>
+                </div>
+                <div class="nav header-item">
+                    <div id="about-link" class="nav-item">
+                        <a href="#about">About</a>
+                    </div>
+                    <div id="work-link" class="nav-item">
+                        <a href="#work">Work</a>
+                    </div>
+                    <div id="contact-link" class="nav-item">
+                        <a href="#contact">Contact</a>
+                    </div>
+                </div>
+            </div> 
+            <div class="header-shadow"></div>
+            <div class="internal-wrapper">
+                <div class="header-shadow-cover"></div>
+                <div id="hello" class="fade-text">
+                    <p>Hello!</p>
+                </div>
+                <div id="about" class="desc fade-text">
+                    <div class="bio">
+                        <p>
+                            I'm a user experience designer who's spent some time on the development side.
+                        </p>
+                        <p>
+                            Basically, I can speak in several jargon-filled tongues.
+                        </p>
+                    </div>
+                </div>
+                <div id="headline">
+                    <h1>CLIENTS</h1>
+                </div>
+                <div class="client-wrapper">
+                    <div class="client-box caruahack">
+                        <img src="img/caruahackbeachlogo.png" alt="Caruahack Logo">
+                    </div>
+                    <div class="client-box optum">
+                        <a href="https://www.optum.com"></a>
+                        <img src="img/Optum.png" alt="Optum Logo">
+                    </div>
+                    <div class="client-box musicsota">
+                        <a href="https://www.instagram.com/musicsota/"></a>
+                        <img src="img/musicsota-tritop-white-black.png" alt="Music-Sota Logo">
+                    </div>
+                    <div class="client-box sp350">
+                        <img src="img/sp350_logo-wide-01.png" alt="Saint Paul 350 Logo">
+                    </div>
+                </div>
+                <div id="headline">
+                    <h1>LET'S BUILD A BETTER TOMORROW</h1>
+                </div>
+                <div class="link-bar">
+                    <div id="linkedin-link" class="link">
+                        <a target="_blank" href="https://www.linkedin.com/in/macdonaldcameron">
+                            <i class="fab fa-3x fa-linkedin-in"></i>
+                        </a>
+                        <span>LinkedIn</span>
+                    </div>
+                    <div id="behance-link" class="link">
+                        <a target="_blank" href="https://www.behance.net/cadoma">
+                            <i class="fab fa-3x fa-behance"></i>
+                        </a>
+                        <span>Behance</span>
+                    </div>
+                    <div id="gitlab-link" class="link">
+                        <a target="_blank" href="https://www.gitlab.com/cadoma">
+                            <i class="fab fa-3x fa-gitlab"></i>
+                        </a>
+                        <span>GitLab</span>
+                    </div>
+                    <div id="mail-link" class="link">
+                        <a target="_blank" href="mailto:cdmacdonald@pm.me">
+                            <i class="fas fa-3x fa-envelope-open"></i>
+                        </a>
+                        <span>Email</span>
+                    </div>
+                </div>
             </div>
-            <div class="desc">
-                <div class="pic">
-                    <img src="img/profile_pic_bw.png" alt="Picture of Cameron MacDonald">
-                </div>
-                <div class="bio">
-                    <span>
-                        I'm a UX Designer with a degree in Computer Science. I've worked in Python, JavaScript, C# and more.
-                        I've also worked in Sketch, InVision, Adobe Creative Suite and more. I dabble in Blender on the side.
-                    </span>
-                    <br>
-                    <br>
-                    <span>
-                        I love solving human-centered problems and learning while I do it. The more I know, the more skills I gain, the more I help, the happier I am.
-                    </span>
-                </div>
-            </div>
-            <div class="quote-wrapper">
-                <div class="quote">
-                    <span>
-                        "The true meaning of life is to plant trees under whose shade you do not expect to sit."
-                    </span>
-                </div>
-                <div class="quote-credit">
-                    <span>
-                        - Nelson Henderson
-                    </span>
-                </div>
-            </div>
-            <div id="headline">
-                <h1>CLIENTS</h1>
-            </div>
-            <div class="client-wrapper">
-                <div class="client-box caruahack">
-                    <img src="img/caruahackbeachlogo.png" alt="Caruahack Logo">
-                </div>
-                <div class="client-box optum">
-                    <a href="https://www.optum.com"></a>
-                    <img src="img/Optum.png" alt="Optum Logo">
-                </div>
-                <div class="client-box musicsota">
-                    <a href="https://www.instagram.com/musicsota/"></a>
-                    <img src="img/musicsota-tritop-white-black.png" alt="Music-Sota Logo">
-                </div>
-                <div class="client-box sp350">
-                    <img src="img/sp350_logo-wide-01.png" alt="Saint Paul 350 Logo">
-                </div>
-            </div>
-            <div id="headline">
-                <h1>LET'S BUILD A BETTER TOMORROW</h1>
-            </div>
-            <div class="link-bar">
-                <div id="linkedin-link" class="link">
-                    <a target="_blank" href="https://www.linkedin.com/in/macdonaldcameron">
-                        <i class="fab fa-3x fa-linkedin-in"></i>
-                    </a>
-                    <span>LinkedIn</span>
-                </div>
-                <div id="behance-link" class="link">
-                    <a target="_blank" href="https://www.behance.net/cadoma">
-                        <i class="fab fa-3x fa-behance"></i>
-                    </a>
-                    <span>Behance</span>
-                </div>
-                <div id="gitlab-link" class="link">
-                    <a target="_blank" href="https://www.gitlab.com/cadoma">
-                        <i class="fab fa-3x fa-gitlab"></i>
-                    </a>
-                    <span>GitLab</span>
-                </div>
-                <div id="mail-link" class="link">
-                    <a target="_blank" href="mailto:cdmacdonald@pm.me">
-                        <i class="fas fa-3x fa-envelope-open"></i>
-                    </a>
-                    <span>Email</span>
-                </div>
-            </div>
+            
         </div>
         <!-- <div class="footer">
 

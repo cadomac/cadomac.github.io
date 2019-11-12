@@ -4,6 +4,10 @@ body {
     padding: 0;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 .page-container {
     position: relative;
     min-height: 100vh;
@@ -11,6 +15,7 @@ body {
 
 .content-wrapper {
     padding-bottom: 15vh;
+    width: 100%;
 }
 
 .link-bar {
@@ -44,9 +49,7 @@ body {
 
 .desc {
     display: flex;
-    margin: auto;
-    margin-top: 7.5em;
-    width: 87vw;
+    margin-left: 7em;
     margin-bottom: 7.5em;
 }
 
@@ -172,4 +175,94 @@ i {
     height: 80%;
     width: 80%;
     margin-top: 18px;
+}
+
+.header {
+    position: sticky;
+    left:0;
+    top:0;
+    background-color: #fff;
+    /* box-shadow: 0 1px 6px 1px rgba(0,0,0,0.1); */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 4em;
+    z-index: 100;
+}
+
+.internal-wrapper {
+    position: relative;
+}
+
+.header-shadow {
+    position: sticky;
+    top: 4em;
+    width: 100%;
+    box-shadow: 0 1px 6px 1px rgba(0,0,0,0.1);
+}
+
+.header-shadow-cover {
+    position: absolute;
+    top:0;
+    height: 6px;
+    width: 100%;
+    background-color: #fff;
+    z-index: 99;
+}
+
+.name-header {
+    width: auto;
+    margin-left: 9.5em;
+}
+
+.name-header a {
+    font-size: 2em;
+    font-weight: 300;
+    color: #000;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-around;
+    margin-right: 8em;
+    width: auto;
+}
+
+.nav-item {
+    width: 8em;
+    text-align: center;
+}
+
+.nav a {
+    color: #000;
+    font-weight: 300;
+    font-size: 2em;
+}
+
+a {
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+}
+
+p {
+    font-family: 'Roboto', sans-serif;
+}
+
+#hello {
+    margin-left: 9.5em;
+    margin-top: 4.5em;
+}
+
+#hello p {
+    font-size: 2.5em;
+    font-weight: 700;
+}
+
+.fade-text {
+    -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: fadein 2s; /* Firefox < 16 */
+        -ms-animation: fadein 2s; /* Internet Explorer */
+         -o-animation: fadein 2s; /* Opera < 12.1 */
+            animation: fadein 2s;
 }
