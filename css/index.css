@@ -58,9 +58,10 @@
 }
 
 .internal-wrapper {
-    width: 78.4%;
+    width: 78.8%;
     margin-left: auto;
     margin-right: auto;
+    margin-top: -2.3em;
 }
 
 #about-link a {
@@ -74,4 +75,7 @@
 
 .bio-line {
     font-weight: 300;
+    width: 78.4%;
+    margin-left: auto;
+    margin-right: auto;
 }
