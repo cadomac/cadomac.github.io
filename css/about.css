@@ -11,7 +11,6 @@ html {
 .page-container {
     position: relative;
     min-height: 100vh;
-    width: 100%;
 }
 
 .content-wrapper {
@@ -26,7 +25,7 @@ html {
     margin-right: auto;
     padding-top: 1em;
     padding-bottom: 1em;
-    width: 100%;
+    width: 80%;
     /* background-color: rgb(247, 247, 247); */
 }
 
@@ -105,17 +104,18 @@ html {
 }
 
 #headline {
-    margin-top: 2em;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 3vw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
     width: 100%;
-    display: flex;
-    justify-content: flex-start;
 }
 
-#headline p {
-    width: auto;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 300;
-    font-size: 3vw;
+#headline h1 {
+    margin: auto;
+    text-align: center;
 }
 
 #name {
@@ -148,30 +148,16 @@ i {
 
 .client-wrapper {
     width: 100%;
+    height: 17em;
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-evenly;
     flex-wrap: wrap;
-    align-items: center;
 }
 
 .client-box {
-    height: 18vw;
-    width: 18vw;
-    margin-left: 5px;
-    margin-right: 5px;
-    margin-top: 1em;
-    padding: 2px 2px 2px 2px;
-    box-shadow: 0px 1px 4px 2px #eee;
+    height: 13em;
+    width: 13em;
     text-align: center;
-    display: flex;
-    align-items: center;
-    transition: 0.3s ease;
-}
-
-.client-box:hover {
-    box-shadow: 0px 1px 5px 4px #ddd;
-    margin-right: 10px;
-    margin-left: 10px;
 }
 
 .client-box img {
@@ -179,6 +165,10 @@ i {
     max-width: 98%;
     margin: auto;
     vertical-align: middle;
+}
+
+.optum img {
+    margin-top: 50px;
 }
 
 .musicsota img {
@@ -192,26 +182,17 @@ i {
     left:0;
     top:0;
     background-color: #fff;
-    width: 100%;
-    height: 4em;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-}
-
-.nav-wrapper {
-    width: 78.5%;
-    margin-left: auto;
-    margin-right: auto;
+    /* box-shadow: 0 1px 6px 1px rgba(0,0,0,0.1); */
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
+    height: 4em;
+    z-index: 100;
 }
 
 .internal-wrapper {
-    width: 78.75%;
-    margin-left: auto;
-    margin-right: auto;
+    position: relative;
 }
 
 .header-shadow {
@@ -232,6 +213,7 @@ i {
 
 .name-header {
     width: auto;
+    margin-left: 9.5em;
 }
 
 .name-header a {
@@ -242,17 +224,18 @@ i {
 }
 
 .name-header a:hover {
-    font-weight: 500;
+    text-decoration: wavy;
 }
 
 .nav {
     display: flex;
     justify-content: space-around;
+    margin-right: 8em;
     width: auto;
 }
 
 .nav-item {
-    width: 10vw;
+    width: 6em;
     text-align: center;
 }
 
@@ -289,11 +272,11 @@ p {
             animation: fadein 2s;
 }
 
-#about-link a {
+#work-link a {
     color: #aaa;
     transition: 0.3s ease;
 }
 
-#about-link a:hover {    
+#work-link a:hover {    
     color: #000;
 }
