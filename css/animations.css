@@ -59,38 +59,38 @@
 }
 
 #linkedin-link:hover span {
-    animation-name: link-text;
+    animation-name: fadein;
     animation-duration: 0.5s;
-    -webkit-animation-name: link-text;
+    -webkit-animation-name: fadein;
     -webkit-animation-duration: 0.5s;
-    margin-top: 0.6em;
+    /* margin-top: 0.6em; */
     opacity: 1;
 }
 
 #gitlab-link:hover span {
-    animation-name: link-text;
+    animation-name: fadein;
     animation-duration: 0.5s;
-    -webkit-animation-name: link-text;
+    -webkit-animation-name: fadein;
     -webkit-animation-duration: 0.5s;
-    margin-top: 0.6em;
+    /* margin-top: 0.6em; */
     opacity: 1;
 }
 
 #behance-link:hover span {
-    animation-name: link-text;
+    animation-name: fadein;
     animation-duration: 0.5s;
-    -webkit-animation-name: link-text;
+    -webkit-animation-name: fadein;
     -webkit-animation-duration: 0.5s;
-    margin-top: 0.6em;
+    /* margin-top: 0.6em; */
     opacity: 1;
 }
 
 #mail-link:hover span {
-    animation-name: link-text;
+    animation-name: fadein;
     animation-duration: 0.5s;
-    -webkit-animation-name: link-text;
+    -webkit-animation-name: fadein;
     -webkit-animation-duration: 0.5s;
-    margin-top: 0.6em;
+    /* margin-top: 0.6em; */
     opacity: 1;
 }
 

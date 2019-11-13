@@ -1,14 +1,14 @@
-#headline {
+.headline {
     margin-top: 2em;
     width: 100%;
     display: flex;
     justify-content: flex-start;
 }
 
-#headline p {
+.headline p {
     width: auto;
     font-family: 'Roboto', sans-serif;
-    font-weight: 300;
+    font-weight: 400;
     font-size: 3vw;
 }
 
@@ -53,8 +53,12 @@
     margin-top: 18px;
 }
 
+.sp350 img {
+    background-color: #387BBF;
+}
+
 .internal-wrapper {
-    width: 78.75%;
+    width: 78.4%;
     margin-left: auto;
     margin-right: auto;
 }
@@ -66,4 +70,8 @@
 
 #about-link a:hover {    
     color: #000;
+}
+
+.bio-line {
+    font-weight: 300;
 }
