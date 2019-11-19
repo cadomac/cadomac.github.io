@@ -89,14 +89,16 @@ p {
     margin-top: -3vw;
 }
 
-#hello p {
+#hello h1 {
     font-size: 3vw;
     font-weight: 700;
+    font-family: 'Roboto', sans-serif;
 }
 
-#connect p {
+#connect h1 {
     font-size: 3vw;
     font-weight: 700;
+    font-family: 'Roboto', sans-serif;
 }
 
 .body-width {
