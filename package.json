@@ -1,0 +1,13 @@
+{
+  "name": "cadoma.gitlab.io",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@gitlab.com:cadoma/cadoma.gitlab.io.git",
+  "license": "MIT",
+  "devDependencies": {
+    "suitcss": "^3.0.0"
+  },
+  "dependencies": {
+    "suitcss-preprocessor": "^4.0.0"
+  }
+}
