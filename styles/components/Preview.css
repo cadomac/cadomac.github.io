@@ -1,0 +1,59 @@
+.Preview {
+  display: grid;
+  grid-template-rows: 1fr;
+  transition: all 0.3s ease;
+  border-radius: 10px;
+}
+
+.Preview:focus>.Preview-wrap {
+  color: white;
+}
+
+.Preview-wrap {
+  background-image: url("/images/placeholder.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  transition: all 0.8s ease;
+
+  padding: 1rem 1.5rem;
+
+  border-radius: 10px;
+
+  min-height: 300px;
+  width: auto;
+}
+
+.about-preview {
+  color: white;
+}
+
+.about-preview-wrap {
+  background-image: url("/images/selfie-headshot-bw-cropped-flipped-wide.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position-x: right;
+  background-position-y: -110px;
+  transition: all 0.5s ease;
+}
+
+.about-preview-wrap .about-flavor {
+  opacity: 0;
+  transition: all 0.75s cubic-bezier(0.39, 0.575, 0.565, 1);
+}
+
+.about-preview-wrap h1 {
+  transition: all 0.75s cubic-bezier(0.39, 0.575, 0.565, 1);
+}
+
+.preview-active>.about-preview-wrap {
+  background-position-y: 0px;
+}
+
+.preview-active>.about-preview-wrap .about-flavor {
+  opacity: 1;
+}
+
+.preview-active>.about-preview-wrap h1 {
+  font-size: 10rem;
+}

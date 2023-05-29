@@ -1,0 +1,12 @@
+@import "vars.css";
+@import "nav.css";
+@import "header.css";
+@import "components.css";
+
+.main-content {
+  height: 80%;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 1rem;
+  padding: 0 2rem;
+  transition: all 0.75s ease;
+}

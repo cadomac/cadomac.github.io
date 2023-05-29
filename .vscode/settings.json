@@ -1,0 +1,10 @@
+{
+  "emmet.preferences": {},
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact",
+    "typescript": "typescriptreact",
+  },
+  "emmet.showExpandedAbbreviation": "always",
+  "emmet.excludeLanguages": [],
+  "emmet.triggerExpansionOnTab": false,
+}
