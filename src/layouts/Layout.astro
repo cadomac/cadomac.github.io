@@ -1,0 +1,175 @@
+---
+export interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="The personal website of Cameron MacDonald, a front-end developer, UX designer, and accessibility specialist.">
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="preconnect" href="https://rsms.me/">
+		<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+		<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body>
+		<main class="maxContainer">
+			<header>
+				<h1 id="tagline">
+					Cameron MacDonald
+				</h1>
+				<!-- <nav id="main-nav">
+					<a href="/">Home</a>
+				</nav> -->
+				<div class="link-menu">
+					<a class="logo-link" href="https://github.com/cadomac/">
+						<svg>
+							<title>GitHub</title>
+							<use href="logos/spritesheet.svg#github">
+						</svg>
+					</a>
+					<a class="logo-link" href="https://www.linkedin.com/in/macdonaldcameron/">
+						<svg>
+							<title>LinkedIn</title>
+							<use href="logos/spritesheet.svg#linkedin">
+						</svg>
+					</a>
+					<a class="logo-link" href="https://gitlab.com/cadoma">
+						<svg>
+							<title>GitLab</title>
+							<use href="logos/spritesheet.svg#gitlab">
+						</svg>
+					</a>
+				</div>
+			</header>
+			<slot />
+		</main>
+	</body>
+</html>
+<style lang="scss" is:global>
+	@use "../styles/colors" as *;
+	@use "../styles/breakpoints" as *;
+	@use "../styles/colors.contrast" as contrast;
+	@use "sass:color";
+	@use "sass:map";
+
+	:root { font-family: 'Inter', sans-serif; }
+	@supports (font-variation-settings: normal) {
+		:root { font-family: 'Inter var', sans-serif; }
+	}
+	html {
+		background-color: $tan-bg;
+		color: $dark-accent;
+
+		*::selection {
+			background: $red-accent;
+		}
+
+		*:focus-visible {
+			border-radius: 5px;
+			outline: 3px solid $dark-accent;
+			outline-offset: 3px;
+		}
+	}
+	body {
+		margin: 0;
+	}
+	code {
+		font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
+			Bitstream Vera Sans Mono, Courier New, monospace;
+	}
+	header {
+		background-color: $tan-accent;
+		border-bottom: 2px solid $dark-accent;
+		color: $dark-accent;
+		position: sticky;
+		padding: 1rem;
+		display: flex;
+		flex-direction: column;
+		gap: 15px;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: 20px;
+
+		@include sm {
+			flex-direction: row;
+		}
+	}
+	#main-nav {
+		display: flex;
+		gap: 10px;
+		> a {
+			color: $dark-accent;
+			padding: 0.5rem;
+			background-position: -200% -200%;
+			background-size: 100% 100%;
+			// background-image: linear-gradient(to right, $dark-accent 50%, $dark-accent 50%);
+
+			&:hover {
+				background-position: 0% 0%;
+				color: $tan-bg;
+			}
+		}
+	}
+	.maxContainer {
+		margin: 20px;
+	}
+	#tagline {
+		font-size: 2rem;
+		font-weight: 400;
+		margin: 0;
+		text-transform: uppercase;
+		text-align: center;
+		text-shadow: 4px 4px 0 color.adjust($dark-accent, $alpha: -0.7);
+		
+		@include sm {
+			text-align: left;
+		}
+	}
+	.window-title {
+			background-color: $dark-accent;
+			box-shadow: 3px 3px 0 color.adjust($dark-accent, $alpha: -0.6);
+			color: $tan-fg;
+			padding: 0.75rem 0.75rem 0.75rem 2rem;
+
+			h2 {
+				margin: 0;
+			}
+	}
+	.window {
+		background-color: $tan-fg;
+		border: 1px solid color.adjust($tan-accent, $alpha: -0.6);
+		box-shadow: 3px 3px 0 0 $box-shadow;
+		line-height: 2;
+
+		.window-content {
+			padding: 0 2rem 1rem;
+		}
+	}
+	.link-menu {
+		display: flex;
+		gap: 20px;
+
+		.logo-link {
+			display: inline-flex;
+			width: 50px;
+			height: 50px;
+			:hover use::part(sprite) {
+				fill: $red-accent;
+			}
+			> svg {
+				
+				
+				justify-content: center;
+				align-items: center;	
+			}
+		}
+	}
+</style>

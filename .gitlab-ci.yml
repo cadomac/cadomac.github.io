@@ -1,10 +1,14 @@
+image: node:lts
+
 pages:
+  cache:
+    paths:
+      - node_modules/
   script:
-  - mkdir .public
-  - cp -r * .public
-  - mv .public public
+    - npm install
+    - npm run build
   artifacts:
     paths:
-    - public
+      - public
   only:
-  - master
+    - master

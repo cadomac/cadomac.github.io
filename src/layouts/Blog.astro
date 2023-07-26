@@ -1,0 +1,54 @@
+---
+export interface Props {
+	title: string;
+    frontmatter: BlogFrontmatter;
+}
+
+export interface BlogFrontmatter {
+    title: string;
+    description: string;
+    tags: string[];
+}
+
+const { frontmatter } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Cameron MacDonald is a front-end developer with over half a decade of professional experience.">
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+        <meta name="keywords" content={frontmatter.tags.join(",")}>
+		<title>{frontmatter.title}</title>
+	</head>
+	<body>
+		<a href="/">Home</a>
+		<a href="/about">About</a>
+		<a href="/blog">Blog</a>
+		<div class="blog-wrap">
+            <slot />
+        </div>
+	</body>
+</html>
+<style>
+    .blog-wrap {
+        margin: 0 auto;
+        width: 85%;
+        max-width: 1280px;
+        box-shadow: 0 0 5px 0 rgb(0 0 0 / 10%),
+        0 0 10px 0 rgb(0 0 0 / 10%),
+        0 0 15px 0 rgb(0 0 0 / 10%);
+        border-radius: 10px;
+        padding: 2rem;
+    }
+
+    .blog-wrap > h1 {
+        margin-top: 0;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgb(0 0 0 / 10%);
+    }
+</style>
