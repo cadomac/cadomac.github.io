@@ -1,0 +1,17 @@
+@use "sass:color";
+
+$blue: #C0E8F9;
+$saffron: #F9C22E;
+$purple: #271F30;
+$action: #197BBD;
+$red: #FF312E;
+$crimson: #D72638;
+$gold: #F7D002;
+$moonstone: #53B3CB;
+$tan-bg: #cdc8b0;
+$tan-fg: #dad4bb;
+$tan-accent: #b4af9a;
+$dark-accent: #4e4b42;
+$red-accent: #cf654b;
+$yellow-accent: #dfd321;
+$box-shadow: color.adjust($tan-accent, $alpha: -0.4);

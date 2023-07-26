@@ -1,0 +1,41 @@
+@use "sass:color";
+
+$hiC-dark: (
+  "bg": black,
+  "fg": white,
+  "light-accent": white,
+  "dark-accent": black,
+  "selection": black,
+  "active-accent": #dfd321,
+  "box-shadow": color.adjust(white, $alpha: -0.75)
+);
+
+$hiC-light: (
+  "bg": white,
+  "fg": black,
+  "light-accent": black,
+  "dark-accent": white,
+  "selection": white,
+  "active-accent": #dfd321,
+  "box-shadow": color.adjust(black, $alpha: -0.75)
+);
+
+@mixin high-contrast-dark {
+  @media (prefers-color-scheme: dark) and (prefers-contrast: more) {
+    @content;
+  }
+}
+
+@mixin high-contrast-light {
+  @media (prefers-color-scheme: light) and (prefers-contrast: more) {
+    @content;
+  }
+}
+
+@mixin hcd {
+  @content;
+}
+
+@mixin hcl {
+  @content;
+}
