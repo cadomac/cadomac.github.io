@@ -7,7 +7,7 @@ export interface Props {
 	highlightColor?: string
 }
 
-const { href, title, background, width=318, highlightColor="" } = Astro.props;
+const { href, title, background, width=150, highlightColor="" } = Astro.props;
 
 ---
 <a class="link-card" target="_blank" href={href} aria-label=`${title}, opens in new tab`>
@@ -32,20 +32,21 @@ const { href, title, background, width=318, highlightColor="" } = Astro.props;
 		}
 	}
 
-	$sm-size-factor: 1.25;
+	$sm-size-factor: 0.6;
 	.link-card {
 		display: block;
-		background-color: $gray-lt;
+		background-color: #f5f9fa;
+		border: 3px solid $hltColor;
 		border-radius: 10px;
 		position: relative;
 		width: $width;
-		height: 318px;
+		height: $width;
 		
 		@include diagonalColorSwipe($hltColor);
 		
 		@include sm {
-			width: calc($width / $sm-size-factor);
-			height: calc($width / $sm-size-factor);
+			width: calc($width * $sm-size-factor);
+			height: calc($width * $sm-size-factor);
 		}
 		
 		@media (prefers-color-scheme: dark) {
@@ -53,17 +54,19 @@ const { href, title, background, width=318, highlightColor="" } = Astro.props;
 		}
 		
 		& img {
-			$length: 180px;
+			$length: 100px;
 			height: $length;
 			width: $length;
 			position: absolute;
 			top: 50%;
 			left: 50%;
 			transform: translate(-50%, -51.5%);
+			transition: 0.2s ease;
 
 			@include sm {
-				width: calc($length / $sm-size-factor);
-				height: calc($length / $sm-size-factor);
+				width: calc($length * $sm-size-factor);
+				height: calc($length * $sm-size-factor);
+				transform: translate(-50%, -58.5%)
 			}
 		}
 
@@ -73,27 +76,37 @@ const { href, title, background, width=318, highlightColor="" } = Astro.props;
 					color: $white;
 				}
 			}
+
+			img {
+				transform: translate(-50%, -58.5%);
+			}
 		}
 	}
 
 	.link-card-title {
 		display: block;
 		position: absolute;
-		color: $gray-lt;
-		bottom: 10px;
+		color: #f5f9fa;
+		bottom: 5px;
 		left: 50%;
 		transform: translateX(-50%);
-		font-size: 2.5rem;
+		font-size: 1rem;
 		font-weight: bolder;
 		margin: 0;
 		transition: all 0.3s 0.05s ease-in-out;
 
-		@include sm {
-			font-size: 1rem;
-		}
-
 		@media (prefers-color-scheme: dark) {
 			color: $black-eerie;
+		}
+
+		@include sm {
+			font-size: .75rem;
+			bottom: 3px;
+			color: $black-eerie;
+
+			@media (prefers-color-scheme: dark) {
+				color: #f5f9fa;
+			}
 		}
 	}
 </style>
