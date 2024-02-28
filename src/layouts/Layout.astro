@@ -12,7 +12,16 @@ import Card from '../components/Card.astro';
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content="The personal website of Cameron MacDonald, a front-end developer, UX designer, and accessibility specialist.">
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="theme-color" content="#000000">
+		<meta name="color-scheme" content="light dark">
+		<meta name="author" content="Cameron MacDonald">
+		<meta name="application-name" content="Personal website of Cameron MacDonald">
+		<meta name="AdsBot-Google" content="noindex">
+		<meta name="twitter:title" content="Cameron MacDonald">
+		<meta name="twitter:image" content="https://cdmacdonald.com/cdmacdonald-favicon.png">
+		<meta name="twitter:card" content="summary_large_image">
+		<link rel="canonical" href="http://cdmacdonald.com">
 		<link rel="icon" type="image/svg+xml" href="/cdmacdonald-favicon.png" />
 		<link rel="preconnect" href="https://rsms.me/">
 		<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
@@ -21,13 +30,43 @@ import Card from '../components/Card.astro';
 		<title>{title}</title>
 	</head>
 	<body>
+		<header>
+			<h1>
+				Cameron MacDonald
+			</h1>
+			<p><span class="prof-title">Design Technologist.</span> <span class="prof-title">Accessibilty Specialist.</span> <span class="prof-title">Angry Idealist.</span></p>
+		</header>
 		<main>
-			<header>
-				<h1>
-					Cameron MacDonald
-				</h1>
-				<p><span class="prof-title">Design Technologist.</span> <span class="prof-title">Accessibilty Specialist.</span> <span class="prof-title">Angry Idealist.</span></p>
-			</header>
+			<div id="about-section">
+				<p>I'm a <span class="u-textBold">web developer</span>, <span class="u-textBold">user experience designer</span>, <span class="u-textBold">accessibility specialist</span>, and more.</p>
+				<p>I specialize in <span class="u-textBold">design systems</span>. I currently work as a <span class="u-textBold">Design Technologist</span> for the Design Operations team at Ameriprise Financial.</p>
+				<hr>
+				<p>I like to spend my free time <span class="u-textBold">learning</span>.</p>
+				<p class="u-textBold">I'm currently learning about:</p>
+				<ul>
+					<li>Abstract Syntax Trees (AST)</li>
+					<li>Web Extension Development</li>
+					<li>Rust (language)</li>
+					<li>Web Components</li>
+					<li>React Native</li>
+					<li>Flutter</li>
+					<li>Blender (3D)</li>
+				</ul>
+				<details>
+					<summary class="u-textBold">
+						Projects
+						<span class="material-symbols-rounded" aria-hidden="true">expand_more</span>
+					</summary>
+					<dl>
+						<dt><a href="https://github.com/cadomac/Proton-To-KeePass">Proton To KeePass</a></dt>
+						<dd>A Python script that converts Proton Pass encrypted exports (.pgp) directly into KeePass databases without writing any decrypted passwords to the filesystem. Useful for secure backups in alternative software.</dd>
+						<dt><a href="https://github.com/cadomac/fresh-eyes">Fresh Eyes</a></dt>
+						<dd>A Chrome extension that applies a filter to webpages to attempt to correct colors and increase contrast for users with color vision deficiencies, such as myself. (I'm a moderate protan.)</dd>
+						<dt><a href="https://www.printables.com/@cadomac_1434444">3D Printing Work (Printables.com)</a></dt>
+						<dd>I like to make models and share them with others. My most popular model right now is a tenting leg I designed for my keyboard, the <a href="https://www.zsa.io/voyager/">ZSA Voyager</a>.</dd>
+					</dl>
+				</details>
+			</div>
 			<div class="LinkCardWrapper">
 				<Card 
 					href="https://github.com/cadomac" 
@@ -38,14 +77,14 @@ import Card from '../components/Card.astro';
 					}} />
 				<Card 
 					href="https://gitlab.com/cadoma" 
-					title="GitLab" highlightColor="#fc6d26" 
+					title="GitLab" highlightColor="#c34d00" 
 					background={{
 						light: "/logos/gitlab-logo-600.svg",
 						dark: "/logos/gitlab-logo-700.svg"	
 					}} />
 				<Card 
 					href="https://codepen.io/cadomac" 
-					title="CodePen" highlightColor="#caa600" 
+					title="CodePen" highlightColor="#897000" 
 					background={{
 						light: "/logos/codepen-logo-black.png",
 						dark: "/logos/codepen-logo-white.png"
@@ -81,8 +120,10 @@ import Card from '../components/Card.astro';
 	@use "../styles/animations" as *;
 	@use "../styles/colors" as *;
 	@use "../styles/breakpoints" as *;
+	@use "../styles/utils" as *;
 	@use "sass:color";
 
+	$gray-lt: color.adjust($gray-ash, $lightness: 25%);
 	$black-eerie-dk: color.adjust($black-eerie, $lightness: -10%);
 	:root { font-family: 'Inter', sans-serif; }
 	@supports (font-variation-settings: normal) {
@@ -101,15 +142,42 @@ import Card from '../components/Card.astro';
 
 		*::selection {
 			background: $orange;
+
+			@media (prefers-color-scheme: dark) {
+				background: color.adjust($action, $lightness: -10%);
+			}
 		}
 
+		*:focus,
 		*:focus-visible {
 			border-radius: 5px;
 			outline: 5px solid $black-eerie;
 			outline-offset: 3px;
 
 			@media (prefers-color-scheme: dark) {
-				outline-color: $orange;
+				outline-color: $white;
+			}
+		}
+
+		hr {
+			border: 1px solid color.adjust($gray-ash, $lightness: 18%);
+			border-radius: 5px;
+		}
+
+		a {
+			color: $orange;
+
+			&:visited {
+				color: color.adjust($orange, $lightness: -20%);
+			}
+
+			&:hover {
+				color: color.adjust($orange, $lightness: -10%);
+			}
+
+			&:focus,
+			&:focus-visible {
+				border-radius: 1px;
 			}
 		}
 	}
@@ -146,6 +214,77 @@ import Card from '../components/Card.astro';
 		}
 	}
 
+	#about-section {
+		background-color: $gray-lt;
+		border-radius: 10px;
+		margin: 20px 0;
+		padding: 30px 40px 40px 40px;
+
+		@media (prefers-color-scheme: dark) {
+			background-color: $black-eerie;
+		}
+
+		details {
+			& > summary {
+				border-radius: 5px;
+				cursor: pointer;
+				color: $action;
+				display: flex;
+				font-size: 1.25rem;
+				align-items: center;
+				gap: 5px;
+				margin-left: -10px;
+				padding: 2px 2px 2px 10px;
+				width: fit-content;
+
+				&:hover {
+					background-color: color.adjust($action, $alpha: -0.9);
+				}
+
+				@media (prefers-color-scheme: dark) {
+					color: color.adjust($action, $lightness: 30%);
+
+					&:hover {
+						background-color: color.adjust($action, $alpha: -0.6);
+					}
+				}
+
+				& span.material-symbols-rounded {
+					font-size: 2rem;
+					margin-top: 2px;
+					transition: 0.2s ease;
+				}
+			}
+
+			&[open] {
+				span.material-symbols-rounded {
+					transform: rotate(180deg);
+				}
+			}
+		}
+
+		h2 {
+			margin: 5px 0;
+		}
+
+		p {
+			font-size: 1.25rem;
+		}
+
+		dl {
+			margin-left: 23px;
+		}
+
+		dt {
+			font-weight: bold;
+			margin-bottom: 10px;
+		}
+
+		dd {
+			margin-bottom: 20px;
+		}
+	}
+
 	.sectionHeader {
 		font-size: 3rem;
 		font-weight: bold;
@@ -156,10 +295,17 @@ import Card from '../components/Card.astro';
 			text-align: center;
 		}
 	}
+	
+	header {
+		margin-left: auto;
+		margin-right: auto;
+		padding: 40px 40px 10px 40px;
+		max-width: $max-width;
+	}
 	main {
 		margin-left: auto;
 		margin-right: auto;
-		padding: 40px;
+		padding: 10px 40px 40px 40px;
 		max-width: $max-width;
 	}
 
@@ -220,11 +366,8 @@ import Card from '../components/Card.astro';
 	.LinkCardWrapper {
 		display: flex;
 		flex-wrap: wrap;
+		justify-content: center;
 		gap: 20px;
 		margin-top: 30px;
-
-		@include sm {
-			justify-content: center;
-		}
 	}
 </style>
