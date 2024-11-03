@@ -1,0 +1,21 @@
+$mobile-viewport: 480px;
+$tablet-viewport: 768px;
+$desktop-viewport: 1024px;
+
+@mixin mobile {
+  @media (max-width: #{$tablet-viewport - 1px}) {
+    @content;
+  } 
+}
+
+@mixin tablet {
+  @media (min-width: #{$tablet-viewport}) and (max-width: #{$desktop-viewport - 1px}) {
+    @content;
+  } 
+}
+
+@mixin desktop {
+  @media (min-width: #{$desktop-viewport}) {
+    @content;
+  } 
+}

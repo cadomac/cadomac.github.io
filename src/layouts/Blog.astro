@@ -11,10 +11,10 @@ export interface BlogFrontmatter {
 }
 
 const { frontmatter } = Astro.props;
-import Layout from './Layout.astro';
+import Layout from '@layouts/Layout.astro';
 ---
 
-<Layout title={frontmatter.title}>
+<Layout title={frontmatter.title} currentPage="blog">
     <slot />
 </Layout>
 <style>

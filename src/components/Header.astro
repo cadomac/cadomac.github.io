@@ -1,16 +1,33 @@
+---
+export interface Props {
+  isHome?: boolean,
+  currentPage: string
+}
+
+const { isHome=false, currentPage } = Astro.props;
+---
+
 <header>
-  <h1>Cameron MacDonald</h1>
+  <a href="/"><h1>Cameron MacDonald</h1></a>
   <nav>
     <div class="backdrop"></div>
-    <a href="/">Resume</a>
-    <a href="/">Blog</a>
-    <a href="/">Work</a>
-    <a href="/">Contact</a>
+    {
+      !isHome ? (
+        <a class:list={{current: currentPage === 'resume'}} href="/resume">Resume</a>
+        <a class:list={{current: currentPage === 'work'}} href="/work">Work</a>
+        <a class:list={{current: currentPage === 'blog'}} href="/blog">Blog</a>
+        <a class:list={{current: currentPage === 'contact'}} href="/contact">Contact</a>
+      ) :
+      (
+        null
+      )
+    }
   </nav>
 </header>
 
 <style lang="scss">
   @use "../../styles/_color.scss" as *;
+  @use "../../styles/_breakpoints.scss" as *;
   @use "sass:color";
   body {
     & > header {
@@ -21,7 +38,20 @@
       margin-top: 20px;
       top: 0;
 			width: 100%;
-			& > h1 {
+
+      @include mobile {
+        justify-content: center;
+        gap: 0;
+        margin-top: 0;
+
+        & > nav {
+          display: none;
+        }
+      }
+      & > a {
+        text-decoration: none;
+      }
+			& > a > h1 {
 				$gradient-mix: color.mix($rose-pink, $orange, 50%);
 				background: linear-gradient(90deg, $rose-pink, $gradient-mix, $rose-pink);
 				background-size: 400% 100%;
@@ -37,6 +67,10 @@
 					transition: color 0.2s ease-in-out,
 					background 0.2s ease-in-out;			
 				}
+
+        @include mobile {
+          font-size: 1.5rem;
+        }
 			}
 
 			& > nav {
@@ -56,7 +90,7 @@
 					);
 					pointer-events: none;
 
-					$blur: 25px;
+					$blur: 7px;
 					backdrop-filter: blur($blur);
 					-webkit-backdrop-filter: blur($blur);
 					z-index: -1;
@@ -69,6 +103,12 @@
 					transition: color 0.1s ease-in-out;
 					line-height: 1;
 					padding: 5px;
+
+          &.current {
+            color: $orange-web;
+            text-decoration: wavy underline;
+            text-underline-offset: 10px;
+          }
 
 					&:hover {
 						color: $pink-orange
@@ -91,7 +131,7 @@
 		}
 
 		100% {
-			background-position: -200% 50%;
+			background-position: -400% 50%;
 		}
 	}
 </style>

@@ -1,10 +1,13 @@
 ---
 export interface Props {
 	title: string;
+	isHome?: boolean;
+	currentPage: string;
 }
 
-const { title } = Astro.props;
+const { title, isHome=false, currentPage } = Astro.props;
 import Header from '../components/Header.astro';
+import { slide, ViewTransitions } from 'astro:transitions';
 ---
 
 <!DOCTYPE html>
@@ -25,15 +28,15 @@ import Header from '../components/Header.astro';
 		<link rel="icon" type="image/svg+xml" href="/cdmacdonald-favicon.png" />
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&family=Red+Hat+Text:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,400;0,900;1,400&family=Red+Hat+Text:ital,wght@0,400;0,900;1,400&display=swap" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
 		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
+		<ViewTransitions />
+		<title>{title} | Cameron MacDonald</title>
 	</head>
 	<body>
-		<Header />
-		<main>
+		<Header isHome={isHome} currentPage={currentPage} />
+		<main transition:animate={slide({ duration: '0.5s'})}>
 			<slot />
 		</main>
 	</body>
@@ -41,21 +44,64 @@ import Header from '../components/Header.astro';
 <style lang="scss" is:global>
 	@use "sass:color";
 	@use "../../styles/_color.scss" as *;
+	@use "../../styles/_breakpoints.scss" as *;
+
+	
+	.material-symbols-rounded {
+		font-family: 'Material Symbols Rounded';
+		font-weight: normal;
+		font-style: normal;
+		font-size: 24px;
+		line-height: 1;
+		letter-spacing: normal;
+		text-transform: none;
+		display: inline-block;
+		white-space: nowrap;
+		word-wrap: normal;
+		direction: ltr;
+		-moz-font-feature-settings: 'liga';
+		-moz-osx-font-smoothing: grayscale;
+	}
 
 	* {
 		box-sizing: border-box;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: antialiased;
+		-o-font-smoothing: antialiased;
+		font-smoothing: antialiased;
+		font-optical-sizing: auto;
 		&:not(h1, h2, h3, h4, h5, h6) {
 			font-family: 'Red Hat Text', sans-serif;
 		}
 	}
 
 	h1, h2, h3, h4, h5, h6 {
-		font-family: 'Red Hat Display', sans-serif;
+		font-family: 'Red Hat Display', 'Trebuchet MS', sans-serif;
+	}
+	
+	html {
+		background-color: $black;
 	}
 
 	body {
 		background: $black;
 		margin: 0;
-		height: 150vh;
+		container: body / inline-size;
+
+		@include mobile {
+			padding-bottom: 2rem;
+		}
+
+		& main {
+			margin: 1rem auto 0 auto;
+			max-width: min(1280px, 90cqw);
+			display: flex;
+			justify-content: center;
+			gap: 3rem;
+
+			@include mobile {
+				margin-top: 0;
+			}
+		}
 	}
 </style>
