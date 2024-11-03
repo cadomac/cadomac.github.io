@@ -1,0 +1,97 @@
+<header>
+  <h1>Cameron MacDonald</h1>
+  <nav>
+    <div class="backdrop"></div>
+    <a href="/">Resume</a>
+    <a href="/">Blog</a>
+    <a href="/">Work</a>
+    <a href="/">Contact</a>
+  </nav>
+</header>
+
+<style lang="scss">
+  @use "../../styles/_color.scss" as *;
+  @use "sass:color";
+  body {
+    & > header {
+			display: flex;
+			align-items: center;
+			gap: 2rem;
+			position: sticky;
+      margin-top: 20px;
+      top: 0;
+			width: 100%;
+			& > h1 {
+				$gradient-mix: color.mix($rose-pink, $orange, 50%);
+				background: linear-gradient(90deg, $rose-pink, $gradient-mix, $rose-pink);
+				background-size: 400% 100%;
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+				font-weight: 800;
+				padding: 1rem 2rem 1rem 2rem;
+
+				margin: 0;
+
+				@media (prefers-reduced-motion: no-preference) {
+					animation: headingBgSlide 15s ease-in-out infinite;
+					transition: color 0.2s ease-in-out,
+					background 0.2s ease-in-out;			
+				}
+			}
+
+			& > nav {
+				display: flex;
+				gap: 2rem;
+				& > .backdrop {
+					position: absolute;
+					inset: 0;
+					$extended-by: 0px;
+					bottom: calc(-1 * $extended-by);
+					$cutoff: calc(100% - $extended-by);
+					-webkit-mask-image: linear-gradient(
+						to bottom,
+						black 0,
+						black $cutoff,
+						transparent $cutoff
+					);
+					pointer-events: none;
+
+					$blur: 25px;
+					backdrop-filter: blur($blur);
+					-webkit-backdrop-filter: blur($blur);
+					z-index: -1;
+				}
+				& > a {
+					font-size: 1.3rem;
+          font-weight: 500;
+					color: $off-white;
+					text-decoration: none;
+					transition: color 0.1s ease-in-out;
+					line-height: 1;
+					padding: 5px;
+
+					&:hover {
+						color: $pink-orange
+					}
+
+					&:focus {
+						border-radius: 2px;
+						background: $pink-orange;
+						color: $blue-black;
+						outline: 3px solid $pink-orange;
+					}
+				}
+			}
+		}
+  }
+
+  @keyframes headingBgSlide {
+		0% {
+			background-position: 0% 50%;
+		}
+
+		100% {
+			background-position: -200% 50%;
+		}
+	}
+</style>

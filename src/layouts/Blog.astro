@@ -11,28 +11,12 @@ export interface BlogFrontmatter {
 }
 
 const { frontmatter } = Astro.props;
+import Layout from './Layout.astro';
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Cameron MacDonald is a front-end developer with over half a decade of professional experience.">
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-        <meta name="keywords" content={frontmatter.tags.join(",")}>
-		<title>{frontmatter.title}</title>
-	</head>
-	<body>
-		<a href="/">Home</a>
-		<a href="/about">About</a>
-		<a href="/blog">Blog</a>
-		<div class="blog-wrap">
-            <slot />
-        </div>
-	</body>
-</html>
+<Layout title={frontmatter.title}>
+    <slot />
+</Layout>
 <style>
     .blog-wrap {
         margin: 0 auto;
