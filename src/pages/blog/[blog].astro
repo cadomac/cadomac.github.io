@@ -1,0 +1,16 @@
+---
+export function getStaticPaths() {
+  return [
+    { params: { blog: 'wud_2024' } },
+  ]
+}
+
+import Layout from '@layouts/Layout.astro';
+const { blog } = Astro.params;
+const blogEntry = await import(`../../content/blog/${blog}.md`);
+---
+
+<Layout title={blogEntry.frontmatter.title} currentPage="blog">
+  <blogEntry.Content />
+</Layout>
+

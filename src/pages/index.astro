@@ -39,10 +39,6 @@ const links = [
           )
         })
       }
-      <div class="grid-bg" aria-hidden="true">
-        <h2>X</h2>
-        <p>X</p>
-      </div>
     </nav>
   </div>
 </Layout>
@@ -75,53 +71,22 @@ const links = [
     }
   }
 
-  .grid-bg {
-    @media (pointer: fine) {
-      translate: 50% calc(-150% - 2rem);
-      padding: 1rem 3rem 3rem 1rem;
-      width: 100%;
-      border-radius: 10px;
-      pointer-events: none;
-      transition: background-color 0.5s ease-in-out,
-      translate 0.5s ease-in-out;
-  
-      & * {
-        visibility: hidden;
-        margin: 0;
-      }
-    }
-
-    @media (pointer: coarse) {
-      display: none;
-    }
-  }
-
   @mixin cardColor($color, $pos) {
     border: 3px solid $color;
 
     @media (pointer: fine) {
       &:hover,
-      &:focus {
-        background-color: transparent;
+      &:focus-visible {
+        background-color: $color;
         z-index: 1;
   
         & > p {
           color: $black;
         }
-  
-        &~ .grid-bg {
-          $posX: 0;
-          $posY: calc(-226.5%);
-          @if $pos > 1 {
-            $posY: calc(-113%);
-          }
-          @if $pos % 2 != 0 {
-            $posX: calc(100% + 1rem); 
-          }
-          translate: $posX $posY;
-          background-color: $color;
-          pointer-events: none;
-        }
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        transition: background-color 0.2s ease-in-out;
       }
     }
 
@@ -185,7 +150,7 @@ const links = [
 
     & > p {
       color: transparent;
-      transition: color 0.5s ease-in-out;
+      transition: color 0.5s ease-in-out 0.1s;
       margin: 0;
 
       @media (pointer: coarse) {
