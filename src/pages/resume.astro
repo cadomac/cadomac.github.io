@@ -1,8 +1,94 @@
 ---
-
+import {Content} from '../content/resume/resume.md';
+import * as skills from '../data/skills.json';
 import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="Resume" currentPage="resume">
-  <h1>Resume</h1>
+  <div class="ResumeWrapper">
+    <h2>Download</h2>
+    <div class="DownloadsWrap">
+      <a href="/public/MacDonald_Resume_Latest.docx" download>DOCX</a>
+      <a href="/public/MacDonald_Resume_Latest.odt" download>ODT</a>
+      <a href="/public/MacDonald_Resume_Latest.pdf" download>PDF</a>
+    </div>
+    <details class="ResumeCollapse">
+      <summary><span aria-hidden="true" class="material-symbols-rounded">expand_more</span> View full resume here</summary>
+      <Content />
+      <h3 id="skills">Skills</h3>
+      <ul id="skills-list">
+        {
+          skills && skills.skills.map((skill) => {
+            return (
+              <li class="skill-item">{skill}</li>
+            )
+          })
+        }
+      </ul>
+    </div>
+    </details>
+
 </Layout>
+
+<style lang="scss">
+  @use "../../styles/_color.scss" as *;
+  @use "../../styles/_breakpoints.scss" as *;
+  .DownloadsWrap {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+
+    & > a {
+      color: $orange-web;
+      font-weight: 900;
+      &:hover {
+        color: $pink-orange;
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        transition: color 0.15s ease-in-out;
+      }
+    }
+  }
+  .ResumeWrapper {
+    padding-bottom: 4rem;
+    width: 100%;
+
+    & .ResumeCollapse {
+      appearance: none;
+
+      &[open] {
+        & .material-symbols-rounded {
+          rotate: 180deg;
+        }
+      }
+
+      & summary {
+        list-style-type: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        cursor: pointer;
+
+        & .material-symbols-rounded {
+          transition: rotate 0.15s ease-in-out;
+        }
+      }
+    }
+  }
+  #skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2rem;
+
+    & .skill-item {
+      list-style-type: none;
+      background-color: $orange;
+      color: $blue-black;
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+      font-weight: 900;
+    }
+  }
+</style>

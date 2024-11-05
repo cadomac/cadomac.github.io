@@ -13,7 +13,7 @@ const { isHome=false, currentPage } = Astro.props;
     <div class="backdrop"></div>
     {
       !isHome ? (
-        <a class:list={{current: currentPage === 'resume'}} href="/resume">Resume</a>
+        <a class:list={{current: currentPage === 'resume'}} href="/resume">Resumé</a>
         <a class:list={{current: currentPage === 'work'}} href="/work">Work</a>
         <a class:list={{current: currentPage === 'blog'}} href="/blog">Blog</a>
         <a class:list={{current: currentPage === 'contact'}} href="/contact">Contact</a>
@@ -51,9 +51,10 @@ const { isHome=false, currentPage } = Astro.props;
       & > a {
         text-decoration: none;
       }
+      $gradient-mix: color.mix($rose-pink, $orange, 50%);
+      $background-gradient: linear-gradient(90deg, $rose-pink, $gradient-mix, $rose-pink);
 			& > a > h1 {
-				$gradient-mix: color.mix($rose-pink, $orange, 50%);
-				background: linear-gradient(90deg, $rose-pink, $gradient-mix, $rose-pink);
+				background: $background-gradient;
 				background-size: 400% 100%;
 				-webkit-background-clip: text;
 				-webkit-text-fill-color: transparent;
@@ -62,9 +63,17 @@ const { isHome=false, currentPage } = Astro.props;
 
 				margin: 0;
 
+        &:hover {
+          -webkit-background-clip: initial;
+          -webkit-text-fill-color: $black;
+          border-radius: 5px;
+        }
+
 				@media (prefers-reduced-motion: no-preference) {
 					animation: headingBgSlide 15s ease-in-out infinite;
 					transition: color 0.2s ease-in-out,
+          -webkit-background-clip 0.4s ease-in-out,
+          -webkit-text-fill-color 0.2s ease-in-out,
 					background 0.2s ease-in-out;			
 				}
 
@@ -72,6 +81,18 @@ const { isHome=false, currentPage } = Astro.props;
           font-size: 1.5rem;
         }
 			}
+
+      & a:has(h1) {
+        &:focus-visible,
+        &:focus {
+          outline-color: $gradient-mix;
+          & h1 {
+            -webkit-background-clip: initial;
+            -webkit-text-fill-color: $black;
+            border-radius: 5px;
+          }
+        }
+      }
 
 			& > nav {
 				display: flex;

@@ -75,6 +75,12 @@ import { slide, ViewTransitions } from 'astro:transitions';
 		}
 	}
 
+	*:focus-visible {
+		outline: 3px solid $off-white;
+		outline-offset: 3px;
+		border-radius: 2px;
+	}
+
 	h1, h2, h3, h4, h5, h6 {
 		font-family: 'Red Hat Display', 'Trebuchet MS', sans-serif;
 	}
