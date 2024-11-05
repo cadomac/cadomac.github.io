@@ -1,27 +1,44 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const links = [
+  {
+    name: "Resume",
+    url: "/resume", 
+    blurb: "experience"
+  },
+  {
+    name: "Work",
+    url: "/work",
+    blurb: "projects"
+  },
+  {
+    name: "Blog",
+    url: "/blog",
+    blurb: "ramblings of a mad man"
+  },
+  {
+    name: "Contact",
+    url: "/contact",
+    blurb: "carrier pigeon preferably"
+  }
+]
 ---
 
 <Layout title="Cameron MacDonald" isHome currentPage="home">
   <div class="IndexWrap">
     <p class="Intro">Check out my stuff</p>
     <nav>
-      <a href="/resume" class="Card" id="Resume">
-        <h2>Resume <span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span></h2>
-        <p>experience</p>
-      </a>
-      <a href="/work" class="Card" id="Work">
-        <h2>Work <span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span></h2>
-        <p>projects</p>
-      </a>
-      <a href="/blog" class="Card" id="Blog">
-        <h2>Blog <span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span></h2>
-        <p>ramblings of a mad man</p>
-      </a>
-      <a href="/contact" class="Card" id="Contact">
-        <h2>Contact <span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span></h2>
-        <p>carrier pigeon preferably</p>
-      </a>
+      {
+        links.map((link) => {
+          return (
+            <a href={link.url} class="Card" id={link.name}>
+              <h2>{link.name} <span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span></h2>
+              <p>{link.blurb}</p>
+            </a>
+          )
+        })
+      }
       <div class="grid-bg" aria-hidden="true">
         <h2>X</h2>
         <p>X</p>
