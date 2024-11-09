@@ -12,6 +12,7 @@ const { Content } = Astro.props;
 
 <style lang="scss" is:global>
     @use "../../styles/_color.scss" as *;
+    @use "../../styles/breakpoints" as *;
     .MarkdownContent {
         & a {
             color: $orange-web;
@@ -22,6 +23,24 @@ const { Content } = Astro.props;
 
             @media (prefers-reduced-motion: no-preference) {
                 transition: color 0.15s ease-in-out;
+            }
+        }
+
+        @include mobile {
+            h2 {
+                font-size: 1.25rem;
+            }
+
+            h3 {
+                font-size: 1rem;
+            }
+
+            h4 {
+                font-size: 0.875rem;
+            }
+
+            li {
+                font-size: 0.875rem;
             }
         }
     }
