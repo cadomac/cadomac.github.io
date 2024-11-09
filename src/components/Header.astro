@@ -11,6 +11,7 @@ const { isHome=false, currentPage } = Astro.props;
 
 <header>
   <a href="/"><h1>Cameron MacDonald</h1></a>
+  <div class="backdrop"></div>
   <div class="NavWrap">
     {
       !isHome && <Nav currentPage={currentPage} />
@@ -33,8 +34,33 @@ const { isHome=false, currentPage } = Astro.props;
       margin-right: auto;
       top: 0;
 			width: 100%;
+      z-index: 1;
 
       max-width: min(1345px, 100%);
+
+      & > .backdrop {
+        display: none;
+        @include mobile {
+          display: block;
+          position: absolute;
+          inset: 0;
+          $extended-by: 0px;
+          bottom: calc(-1 * $extended-by);
+          $cutoff: calc(100% - $extended-by);
+          -webkit-mask-image: linear-gradient(
+              to bottom,
+              black 0,
+              black $cutoff,
+              transparent $cutoff
+          );
+          pointer-events: none;
+
+          $blur: 7px;
+          backdrop-filter: blur($blur);
+          -webkit-backdrop-filter: blur($blur);
+          z-index: -1;
+        }
+      }
 
       @include mobile {
         justify-content: center;

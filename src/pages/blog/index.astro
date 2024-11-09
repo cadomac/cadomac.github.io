@@ -20,7 +20,12 @@ const blogEntries = Object.values(await import.meta.glob('../../content/blog/*.{
 </Layout>
 
 <style lang="scss">
+  @use "../../../styles/_breakpoints.scss" as *;
   h2 {
     font-size: 4rem;
+
+    @include mobile {
+      font-size: 2rem;
+    }
   }
 </style>

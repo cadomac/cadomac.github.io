@@ -85,6 +85,10 @@ import Layout from "../layouts/Layout.astro";
     gap: 2rem;
     padding-left: 0;
 
+    @include mobile {
+      gap: 1rem;
+    }
+
     & .skill-item {
       list-style-type: none;
       background-color: $orange;
@@ -92,6 +96,11 @@ import Layout from "../layouts/Layout.astro";
       padding: 0.5rem 1rem;
       border-radius: 10px;
       font-weight: 900;
+
+      @include mobile {
+        font-size: 0.875rem;
+        padding: 0.25rem 0.5rem;
+      }
     }
   }
 </style>
