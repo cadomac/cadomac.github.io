@@ -1,0 +1,79 @@
+---
+export interface Props {
+    currentPage: string;
+}
+
+const { currentPage } = Astro.props;
+---
+
+<nav class="SiteNav">
+    <div class="backdrop"></div>
+    <a class:list={{ current: currentPage === "resume" }} href="/resume"
+        >Resumé</a
+    >
+    <a class:list={{ current: currentPage === "work" }} href="/work">Work</a>
+    <a class:list={{ current: currentPage === "blog" }} href="/blog">Blog</a>
+    <a class:list={{ current: currentPage === "contact" }} href="/contact"
+        >Contact</a
+    >
+</nav>
+
+<style lang="scss">
+    @use "../../styles/_color.scss" as *;
+    @use "../../styles/_breakpoints.scss" as *;
+
+    header .SiteNav {
+        @include mobile {
+            display: none;
+        }
+    }
+    nav {
+        display: flex;
+        gap: 2rem;
+        & > .backdrop {
+            position: absolute;
+            inset: 0;
+            $extended-by: 0px;
+            bottom: calc(-1 * $extended-by);
+            $cutoff: calc(100% - $extended-by);
+            -webkit-mask-image: linear-gradient(
+                to bottom,
+                black 0,
+                black $cutoff,
+                transparent $cutoff
+            );
+            pointer-events: none;
+
+            $blur: 7px;
+            backdrop-filter: blur($blur);
+            -webkit-backdrop-filter: blur($blur);
+            z-index: -1;
+        }
+        & > a {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: $off-white;
+            text-decoration: none;
+            transition: color 0.1s ease-in-out;
+            line-height: 1;
+            padding: 5px;
+
+            &.current {
+                color: $orange-web;
+                text-decoration: wavy underline;
+                text-underline-offset: 10px;
+            }
+
+            &:hover {
+                color: $pink-orange;
+            }
+
+            &:focus {
+                border-radius: 2px;
+                background: $pink-orange;
+                color: $blue-black;
+                outline: 3px solid $pink-orange;
+            }
+        }
+    }
+</style>

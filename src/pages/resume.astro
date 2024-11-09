@@ -1,5 +1,6 @@
 ---
 import {Content} from '../content/resume/resume.md';
+import Markdown from '@components/Markdown.astro';
 import * as skills from '../data/skills.json';
 import Layout from "../layouts/Layout.astro";
 ---
@@ -14,7 +15,7 @@ import Layout from "../layouts/Layout.astro";
     </div>
     <details class="ResumeCollapse">
       <summary><span aria-hidden="true" class="material-symbols-rounded">expand_more</span> View web resume here</summary>
-      <Content />
+      <Markdown Content={Content} />
       <h3 id="skills">Skills</h3>
       <ul id="skills-list">
         {
@@ -38,17 +39,6 @@ import Layout from "../layouts/Layout.astro";
     gap: 1rem;
     margin-bottom: 2rem;
 
-    & > a {
-      color: $orange-web;
-      font-weight: 900;
-      &:hover {
-        color: $pink-orange;
-      }
-
-      @media (prefers-reduced-motion: no-preference) {
-        transition: color 0.15s ease-in-out;
-      }
-    }
   }
   .ResumeWrapper {
     padding-bottom: 4rem;
@@ -73,6 +63,18 @@ import Layout from "../layouts/Layout.astro";
         & .material-symbols-rounded {
           transition: rotate 0.15s ease-in-out;
         }
+      }
+    }
+
+    & a {
+      color: $orange-web;
+      font-weight: 900;
+      &:hover {
+        color: $pink-orange;
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        transition: color 0.15s ease-in-out;
       }
     }
   }
