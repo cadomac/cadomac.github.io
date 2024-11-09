@@ -1,7 +1,46 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import * as projectsJSON from '../data/projects.json';
+import Card from '@components/Card.astro';
+
+const projects = projectsJSON.projects
 ---
 <Layout title="Work" currentPage="work">
-  <h1>Work</h1>
-
+  <div class="WorkWrapper">
+    <h1>Work</h1>
+    <div class="ProjectWrapper">
+      {
+        projects.map((project) => {
+          return (
+            <Card 
+              href={project.url} 
+              title={project.name} 
+              desc={project.description} 
+              background={project.background}
+              external
+              />
+          )
+        })
+      }
+    </div>
+  </div>
 </Layout>
+<style lang="scss">
+  @use "../../styles/_color.scss" as *;
+  @use "../../styles/_breakpoints.scss" as *;
+  @use "sass:color";
+
+  .WorkWrapper {
+    width: 100%;
+  }
+  .ProjectWrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 1rem;
+
+    @include mobile {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

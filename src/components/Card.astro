@@ -1,112 +1,175 @@
 ---
 export interface Props {
-	href: string,
+	href?: string,
 	title: string,
-	background: { light: string, dark: string },
-	width?: number,
-	highlightColor?: string
+	desc: string,
+	background?: string,
+	backgroundImg?: string,
+	external?: boolean
 }
 
-const { href, title, background, width=150, highlightColor="" } = Astro.props;
+const { href, title, desc, background="off-white", backgroundImg, external=false } = Astro.props;
 
----
-<a class="link-card" target="_blank" href={href} aria-label=`${title}, opens in new tab`>
-	<picture>
-		<source srcset={background.dark} media="(prefers-color-scheme: dark)">
-		<img src={background.light} alt="">
-	</picture>
-	<p class="link-card-title" aria-hidden="true">{title}</p>
-</a>
-<style lang="scss" define:vars={{ width: `${width}px`, hltColor: `${highlightColor}` }}>
-	@use "sass:color";
-	@use "../../styles/animations" as *;
-	@use "../../styles/breakpoints" as *;
-	@use "../../styles/colors" as *;
+const Tag = href ? "a" : "div";
 
-	$gray-lt: color.adjust($gray-ash, $lightness: 25%);
-	$width: var(--width, 318px);
-	$hltColor: var(--hltColor, $orange);
-	@media (prefers-reduced-motion) {
-		.link-card {
-			transition: none !important;
-		}
+const id = title.replace(/\s/g, "");
+
+type JSON = { 
+	white: Function,
+	black: Function,
+	orange: Function,
+	default: {
+		[key: string]: string
 	}
+ };
 
-	$sm-size-factor: 0.6;
-	.link-card {
-		display: block;
-		background-color: #f5f9fa;
-		border: 3px solid $hltColor;
-		border-radius: 10px;
-		position: relative;
-		width: $width;
-		height: $width;
-		
-		@include diagonalColorSwipe($hltColor);
-		
-		@include sm {
-			width: calc($width * $sm-size-factor);
-			height: calc($width * $sm-size-factor);
-		}
-		
-		@media (prefers-color-scheme: dark) {
-			background-color: $black-eerie;
-		}
-		
-		& img {
-			$length: 100px;
-			height: $length;
-			width: $length;
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -51.5%);
-			transition: 0.2s ease;
+import * as colorsJSON from "../data/colors.json";
 
-			@include sm {
-				width: calc($length * $sm-size-factor);
-				height: calc($length * $sm-size-factor);
-				transform: translate(-50%, -58.5%)
-			}
-		}
+// @ts-ignore
+let colors: JSON["default"] = colorsJSON.default;
 
-		&:hover, &:focus, &:active {
-			.link-card-title {
-				@media (prefers-color-scheme: dark) {
-					color: $white;
+const card_style = `
+	#${id} {
+			border: 3px solid ${colors[background]};
+
+			@media (pointer: fine) {
+				&:hover,
+				&:focus-visible {
+					background: ${backgroundImg ? `url(${backgroundImg})` : colors[background]};
+					z-index: 1;
+			
+					& > p {
+					color: ${colors.black};
+					}
+				}
+
+				@media (prefers-reduced-motion: no-preference) {
+					transition: background-color 0.2s ease-in-out;
 				}
 			}
 
-			img {
-				transform: translate(-50%, -58.5%);
+			&:focus {
+				outline: 3px solid ${colors[background]};
+				outline-offset: 3px;
 			}
+		}`
+
+---
+
+<Tag class="Card" target={href && external ? "_blank" : null} id={id} href={href} aria-label={href ? `${title}, opens in new tab` : null}>
+	<style set:html={card_style} />
+	<h2>{title} <span class="material-symbols-rounded" aria-hidden="true">{external ? "open_in_new" : "arrow_forward" }</span></h2>
+	<p>{desc}</p>
+</Tag>
+
+<style lang="scss">
+	@use "sass:color";
+	@use "../../styles/breakpoints" as *;
+	@use "../../styles/color" as *;
+
+	@mixin cardColor($color, $pos) {
+		border: 3px solid $color;
+
+		@media (pointer: fine) {
+		&:hover,
+		&:focus-visible {
+			background-color: $color;
+			z-index: 1;
+	
+			& > p {
+			color: $black;
+			}
+		}
+
+		@media (prefers-reduced-motion: no-preference) {
+			transition: background-color 0.2s ease-in-out;
+		}
+		}
+
+		&:focus {
+		outline: 3px solid $color;
+		outline-offset: 3px;
 		}
 	}
 
-	.link-card-title {
+	a.Card {
+		position: relative;
+		container: card / inline-size;
+		$padding-br: 3rem;
+		$padding-tl: 1rem;
+		border-radius: 10px;
+		text-decoration: none;
+		color: $off-white;
+		padding: $padding-tl $padding-br $padding-br $padding-tl;
 		display: block;
-		position: absolute;
-		color: #f5f9fa;
-		bottom: 5px;
-		left: 50%;
-		transform: translateX(-50%);
-		font-size: 1rem;
-		font-weight: bolder;
-		margin: 0;
-		transition: all 0.3s 0.05s ease-in-out;
+		transition: color 0.5s ease-in-out;
+		height: 100%;
 
-		@media (prefers-color-scheme: dark) {
-			color: $black-eerie;
+		@include mobile {
+		padding-bottom: 2rem;
 		}
 
-		@include sm {
-			font-size: .75rem;
-			bottom: 3px;
-			color: $black-eerie;
-
-			@media (prefers-color-scheme: dark) {
-				color: #f5f9fa;
+		@media (pointer: fine) {
+			&:hover,
+			&:focus {
+				color: $black;
 			}
+		}
+
+		$id: var(--id);
+
+		// &##{$id} {
+		// 	border: 3px solid $color;
+
+		// 	@media (pointer: fine) {
+		// 		&:hover,
+		// 		&:focus-visible {
+		// 			background-color: $color;
+		// 			z-index: 1;
+			
+		// 			& > p {
+		// 			color: $black;
+		// 			}
+		// 		}
+
+		// 		@media (prefers-reduced-motion: no-preference) {
+		// 			transition: background-color 0.2s ease-in-out;
+		// 		}
+		// 	}
+
+		// 	&:focus {
+		// 		outline: 3px solid $color;
+		// 		outline-offset: 3px;
+		// 	}
+		// }
+		& > h2 {
+		display: flex;
+		align-items: center;
+		width: 100%;
+		font-weight: 400;
+		gap: 0.5rem;
+		margin: 0;
+		& > .material-symbols-rounded {
+			height: 1em;
+		}
+
+		@include mobile {
+			font-size: 1.25rem;
+		}
+		}
+
+		& > p {
+		color: transparent;
+		transition: color 0.5s ease-in-out 0.1s;
+		margin: 0;
+
+		@media (pointer: coarse) {
+			color: color.mix($black, $off-white, 50%);
+		}
+
+		@include mobile {
+			font-size: 0.8rem;
+		}
 		}
 	}
 </style>

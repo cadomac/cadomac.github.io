@@ -1,26 +1,31 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
 
 const links = [
   {
     name: "Resume",
     url: "/resume", 
-    blurb: "experience"
+    blurb: "experience",
+    color: "off-white"
   },
   {
     name: "Work",
     url: "/work",
-    blurb: "projects"
+    blurb: "projects",
+    color: "orange-web"
   },
   {
     name: "Blog",
     url: "/blog",
-    blurb: "ramblings of a mad man"
+    blurb: "ramblings of a mad man",
+    color: "pink-orange"
   },
   {
     name: "Contact",
     url: "/contact",
-    blurb: "carrier pigeon preferably"
+    blurb: "carrier pigeon preferably",
+    color: "blue-light"
   }
 ]
 ---
@@ -32,10 +37,7 @@ const links = [
       {
         links.map((link) => {
           return (
-            <a href={link.url} class="Card" id={link.name}>
-              <h2>{link.name} <span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span></h2>
-              <p>{link.blurb}</p>
-            </a>
+            <Card href={link.url} title={link.name} desc={link.blurb} background={link.color} />
           )
         })
       }

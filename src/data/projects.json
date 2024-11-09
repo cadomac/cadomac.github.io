@@ -1,0 +1,22 @@
+{
+    "projects": [
+        {
+            "name": "Proton to KeePass",
+            "url": "https://github.com/cadomac/Proton-To-KeePass",
+            "description": "Convert encrypted Proton Pass exports to KeePass databases",
+            "background": "light-green"
+        },
+        {
+            "name": "Fresh Eyes",
+            "url": "https://github.com/cadomac/Fresh-Eyes",
+            "description": "Chrome extension to aid users with color vision deficiencies",
+            "background": "rose-pink"
+        },
+        {
+            "name": "postcss-hocus-pocus",
+            "url": "https://github.com/cadomac/postcss-hocus-pocus",
+            "description": "Small extension for PostCSS to provide shorthand for :hover/:focus/:active selectors",
+            "background": "orange"
+        }
+    ]
+}
