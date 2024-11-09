@@ -1,0 +1,26 @@
+---
+import { getEntries } from 'astro:content';
+import Layout from '@layouts/Layout.astro';
+
+const blogEntries = Object.values(await import.meta.glob('../../content/blog/*.{md,mdx}', { eager: true }));
+---
+<Layout title="Blog" currentPage="blog">
+  <h2>Coming soon</h2>
+  <!-- <ul>
+    {
+      blogEntries.map((entry) => {
+        let link = entry.file.split('/').pop();
+        link = link.slice(0, link.lastIndexOf('.'));
+        return (
+          <li><a href={`/blog/${link}`}>{entry.frontmatter.title}</a></li>
+        )
+      })
+    }
+  </ul> -->
+</Layout>
+
+<style lang="scss">
+  h2 {
+    font-size: 4rem;
+  }
+</style>

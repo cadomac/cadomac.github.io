@@ -1,0 +1,32 @@
+---
+
+
+---
+
+<div class="KeyboardNav">
+  <input type="text" name="keeb_nav" id="keeb_nav" />
+</div>
+<script>
+  class KeyboardNav {
+    nav: HTMLDivElement;
+    input: HTMLInputElement;
+    constructor() {
+      this.init()
+      this.nav = document.querySelector(".KeyboardNav") as HTMLDivElement
+      this.input = document.getElementById("keeb_nav") as HTMLInputElement
+    }
+    init() {
+
+    }
+  }
+  const nav = document.querySelector(".KeyboardNav") as HTMLDivElement
+  const input = document.getElementById("keeb_nav")
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "/" && nav) {
+      nav.style.display = "block"
+    }
+
+    if (e.key === "Escape" && nav && nav.style.display === "block") {
+    }
+  })
+</script>
