@@ -1,4 +1,6 @@
 ---
+import Nav from './Nav.astro';
+
 export interface Props {
   isHome?: boolean,
   currentPage: string
@@ -9,20 +11,11 @@ const { isHome=false, currentPage } = Astro.props;
 
 <header>
   <a href="/"><h1>Cameron MacDonald</h1></a>
-  <nav>
-    <div class="backdrop"></div>
+  <div class="NavWrap">
     {
-      !isHome ? (
-        <a class:list={{current: currentPage === 'resume'}} href="/resume">Resumé</a>
-        <a class:list={{current: currentPage === 'work'}} href="/work">Work</a>
-        <a class:list={{current: currentPage === 'blog'}} href="/blog">Blog</a>
-        <a class:list={{current: currentPage === 'contact'}} href="/contact">Contact</a>
-      ) :
-      (
-        null
-      )
+      !isHome && <Nav currentPage={currentPage} />
     }
-  </nav>
+  </div>
 </header>
 
 <style lang="scss">
@@ -48,7 +41,7 @@ const { isHome=false, currentPage } = Astro.props;
         gap: 0;
         margin-top: 0;
 
-        & > nav {
+        & > .NavWrap {
           display: none;
         }
       }
@@ -97,56 +90,6 @@ const { isHome=false, currentPage } = Astro.props;
           }
         }
       }
-
-			& > nav {
-				display: flex;
-				gap: 2rem;
-				& > .backdrop {
-					position: absolute;
-					inset: 0;
-					$extended-by: 0px;
-					bottom: calc(-1 * $extended-by);
-					$cutoff: calc(100% - $extended-by);
-					-webkit-mask-image: linear-gradient(
-						to bottom,
-						black 0,
-						black $cutoff,
-						transparent $cutoff
-					);
-					pointer-events: none;
-
-					$blur: 7px;
-					backdrop-filter: blur($blur);
-					-webkit-backdrop-filter: blur($blur);
-					z-index: -1;
-				}
-				& > a {
-					font-size: 1.3rem;
-          font-weight: 500;
-					color: $off-white;
-					text-decoration: none;
-					transition: color 0.1s ease-in-out;
-					line-height: 1;
-					padding: 5px;
-
-          &.current {
-            color: $orange-web;
-            text-decoration: wavy underline;
-            text-underline-offset: 10px;
-          }
-
-					&:hover {
-						color: $pink-orange
-					}
-
-					&:focus {
-						border-radius: 2px;
-						background: $pink-orange;
-						color: $blue-black;
-						outline: 3px solid $pink-orange;
-					}
-				}
-			}
 		}
   }
 
