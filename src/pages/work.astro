@@ -4,21 +4,38 @@ import * as projectsJSON from '../data/projects.json';
 import Card from '@components/Card.astro';
 
 const projects = projectsJSON.projects
+const volunteer = projectsJSON.volunteer
 ---
 <Layout title="Work" currentPage="work">
   <div class="WorkWrapper">
-    <h1>Work</h1>
+    <h2>Projects</h2>
     <div class="ProjectWrapper">
       {
         projects.map((project) => {
           return (
             <Card 
-              href={project.url} 
-              title={project.name} 
-              desc={project.description} 
-              background={project.background}
-              external
-              />
+            href={project.url} 
+            title={project.name} 
+            desc={project.description} 
+            background={project.background}
+            external
+            />
+          )
+        })
+      }
+    </div>
+    <h2>Volunteership</h2>
+    <div class="ProjectWrapper">
+      {
+        volunteer.map((project) => {
+          return (
+            <Card 
+            href={project.url} 
+            title={project.name} 
+            desc={project.description} 
+            background={project.background}
+            external
+            />
           )
         })
       }
@@ -36,7 +53,6 @@ const projects = projectsJSON.projects
   .ProjectWrapper {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
     gap: 1rem;
 
     @include mobile {

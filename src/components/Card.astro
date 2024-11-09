@@ -2,13 +2,14 @@
 export interface Props {
 	href?: string,
 	title: string,
-	desc: string,
+	desc?: string,
 	background?: string,
 	backgroundImg?: string,
-	external?: boolean
+	external?: boolean,
+	mail?: boolean
 }
 
-const { href, title, desc, background="off-white", backgroundImg, external=false } = Astro.props;
+const { href, title, desc, background="off-white", backgroundImg, external=false, mail=false } = Astro.props;
 
 const Tag = href ? "a" : "div";
 
@@ -58,7 +59,7 @@ const card_style = `
 
 <Tag class="Card" target={href && external ? "_blank" : null} id={id} href={href} aria-label={href ? `${title}, opens in new tab` : null}>
 	<style set:html={card_style} />
-	<h2>{title} <span class="material-symbols-rounded" aria-hidden="true">{external ? "open_in_new" : "arrow_forward" }</span></h2>
+	<h2>{title} <span class="material-symbols-rounded" aria-hidden="true">{external ? mail ? "mail" : "open_in_new" : "arrow_forward" }</span></h2>
 	<p>{desc}</p>
 </Tag>
 

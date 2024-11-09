@@ -15,5 +15,14 @@
  "orange-web": "#FCA311",
  "pink-orange": "#ff5a7b",
  "light-green": "#9CFC97",
- "dark-red": "#901C14"
+ "dark-red": "#901C14",
+ "proton": "#8159FF",
+ "gitlab": "#F99929",
+ "github": "#0E50D1",
+ "mastodon": "#4F42F9",
+ "codepen": "#FED832",
+ "bluesky": "#0E6CFF",
+ "behance": "#0338FF",
+ "linkedin": "#0D4FB4",
+ "nicemoves": "#D73544"
 }

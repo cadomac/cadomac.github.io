@@ -1,0 +1,37 @@
+---
+interface Props {
+    href: string,
+    title: string,
+    background: string,
+    image: string,
+}
+
+import { Image } from 'astro:assets';
+import ProtonMail from '../static/logos/ProtonMail.svg';
+
+const { href, title, background="off-white", image } = Astro.props;
+
+const id = title.replace(/\s/g, "");
+
+import * as colorsJSON from "../data/colors.json";
+
+// @ts-ignore
+let colors: JSON["default"] = colorsJSON.default;
+
+const colorStyles = `
+    #${id} {
+        background-color: ${colors[background]};
+    }
+`
+---
+
+<a class="ContactCard" id={id} href={href} target="_blank">
+    <Image src={ProtonMail} alt={title} width={50} height={50} />
+    <style set:html={colorStyles} />
+</a>
+
+<style lang="scss">
+    .ContactCard {
+        padding: 2rem;
+    }
+</style>

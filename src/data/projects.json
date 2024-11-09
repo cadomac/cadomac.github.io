@@ -18,5 +18,13 @@
             "description": "Small extension for PostCSS to provide shorthand for :hover/:focus/:active selectors",
             "background": "orange"
         }
+    ],
+    "volunteer": [
+        {
+            "name": "Nice Moves MN",
+            "url": "https://nicemoves.org/about",
+            "description": "Non-profit support for animators and motion graphic artists in the Midwest",
+            "background": "nicemoves"
+        }
     ]
 }
