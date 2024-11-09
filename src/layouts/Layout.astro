@@ -6,7 +6,8 @@ export interface Props {
 }
 
 const { title, isHome=false, currentPage } = Astro.props;
-import Header from '../components/Header.astro';
+import Header from '@components/Header.astro';
+import Nav from '@components/Nav.astro';
 import { slide, ViewTransitions } from 'astro:transitions';
 ---
 
@@ -39,12 +40,35 @@ import { slide, ViewTransitions } from 'astro:transitions';
 		<main transition:animate={slide({ duration: '0.5s'})}>
 			<slot />
 		</main>
+		{
+		!isHome && 
+		<footer>
+			<Nav currentPage={currentPage} />
+		</footer>
+		}
 	</body>
 </html>
 <style lang="scss" is:global>
 	@use "sass:color";
 	@use "../../styles/_color.scss" as *;
 	@use "../../styles/_breakpoints.scss" as *;
+
+	footer {
+		display: none;
+		
+		@include mobile {
+			display: flex;
+			position: fixed;
+			bottom: -25px;
+			height: 100px;
+			width: 100%;
+			justify-content: center;
+
+			& > .SiteNav {
+				padding-top: 10px;
+			}
+		}
+	}
 
 	
 	.material-symbols-rounded {
@@ -95,7 +119,7 @@ import { slide, ViewTransitions } from 'astro:transitions';
 		container: body / inline-size;
 
 		@include mobile {
-			padding-bottom: 2rem;
+			padding-bottom: 8rem;
 		}
 
 		& main {

@@ -1,0 +1,28 @@
+---
+interface Props {
+    Content: Function;
+}
+
+const { Content } = Astro.props;
+---
+
+<div class="MarkdownContent">
+    <Content />
+</div>
+
+<style lang="scss" is:global>
+    @use "../../styles/_color.scss" as *;
+    .MarkdownContent {
+        & a {
+            color: $orange-web;
+            font-weight: 900;
+            &:hover {
+                color: $pink-orange;
+            }
+
+            @media (prefers-reduced-motion: no-preference) {
+                transition: color 0.15s ease-in-out;
+            }
+        }
+    }
+</style>
