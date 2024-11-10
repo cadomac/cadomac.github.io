@@ -58,6 +58,10 @@ const { currentPage } = Astro.props;
             line-height: 1;
             padding: 5px;
 
+            @media (prefers-color-scheme: light) {
+                color: $black;
+            }
+
             &.current {
                 color: $orange-web;
                 text-decoration: wavy underline;
