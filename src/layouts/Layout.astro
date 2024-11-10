@@ -103,20 +103,35 @@ import { slide, ViewTransitions } from 'astro:transitions';
 		outline: 3px solid $off-white;
 		outline-offset: 3px;
 		border-radius: 2px;
+
+		@media (prefers-color-scheme: light) {
+			outline: 3px solid $black;
+		}
 	}
 
 	h1, h2, h3, h4, h5, h6 {
 		font-family: 'Red Hat Display', 'Trebuchet MS', sans-serif;
 	}
+
+	$bg-dark: $black;
+	$bg-light: $off-white;
 	
 	html {
-		background-color: $black;
+		background-color: $bg-dark;
+
+		@media (prefers-color-scheme: light) {
+			background: $bg-light;
+		}
 	}
 
 	body {
-		background: $black;
+		background: $bg-dark;
 		margin: 0;
 		container: body / inline-size;
+
+		@media (prefers-color-scheme: light) {
+			background: $bg-light;
+		}
 
 		@include mobile {
 			padding-bottom: 8rem;
@@ -128,10 +143,6 @@ import { slide, ViewTransitions } from 'astro:transitions';
 			display: flex;
 			justify-content: center;
 			gap: 3rem;
-
-			@include mobile {
-				margin-top: 0;
-			}
 		}
 	}
 </style>

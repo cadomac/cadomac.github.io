@@ -7,7 +7,7 @@ const links = [
     name: "Resume",
     url: "/resume", 
     blurb: "experience",
-    color: "off-white"
+    color: "parchment"
   },
   {
     name: "Work",
@@ -70,98 +70,6 @@ const links = [
       font-size: 1.25rem;
       text-align: center;
       margin-top: 0;
-    }
-  }
-
-  @mixin cardColor($color, $pos) {
-    border: 3px solid $color;
-
-    @media (pointer: fine) {
-      &:hover,
-      &:focus-visible {
-        background-color: $color;
-        z-index: 1;
-  
-        & > p {
-          color: $black;
-        }
-      }
-
-      @media (prefers-reduced-motion: no-preference) {
-        transition: background-color 0.2s ease-in-out;
-      }
-    }
-
-    &:focus {
-      outline: 3px solid $color;
-      outline-offset: 3px;
-    }
-  }
-
-  a.Card {
-    position: relative;
-    container: card / inline-size;
-    $padding-br: 3rem;
-    $padding-tl: 1rem;
-    border-radius: 10px;
-    text-decoration: none;
-    color: $off-white;
-    padding: $padding-tl $padding-br $padding-br $padding-tl;
-    display: block;
-    transition: color 0.5s ease-in-out;
-    height: 100%;
-
-    @include mobile {
-      padding-bottom: 2rem;
-    }
-
-    @media (pointer: fine) {
-      &:hover,
-      &:focus {
-        color: $black;
-      }
-    }
-
-    &#Resume {
-      @include cardColor($off-white, 0);
-    }
-    &#Work {
-      @include cardColor($orange-web, 1);
-    }
-    &#Blog {
-      @include cardColor($pink-orange, 2);
-    }
-    &#Contact {
-      @include cardColor($blue-light, 3);
-    }
-    & > h2 {
-      display: flex;
-      align-items: center;
-      width: 100%;
-      font-weight: 400;
-      gap: 0.5rem;
-      margin: 0;
-      & > .material-symbols-rounded {
-        height: 1em;
-      }
-
-      @include mobile {
-        font-size: 1.25rem;
-      }
-    }
-
-    & > p {
-      color: transparent;
-      transition: color 0.5s ease-in-out 0.1s;
-      margin: 0;
-
-      @media (pointer: coarse) {
-        color: color.mix($black, $off-white, 50%);
-      }
-
-      @include mobile {
-        font-size: 0.8rem;
-      }
     }
   }
 </style>
