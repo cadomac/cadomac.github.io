@@ -1,12 +1,13 @@
 image: node:lts
 
-pages:
+deploy-pages:
   cache:
     paths:
       - node_modules/
   script:
     - npm install
     - npm run build
+  pages: true
   artifacts:
     paths:
       - dist
