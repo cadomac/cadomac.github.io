@@ -5,9 +5,6 @@ deploy-pages:
     paths:
       - node_modules/
   script:
-    # Build and compress public/
-    - find public -type f -regex '.*\.\(css\|js\|html\|svg\|png\|jpg\)' -exec gzip -f -k {} \;
-    - find public -type f -regex '.*\.\(css\|js\|html\|svg\|png\|jpg\)' -exec brotli -f -k {} \;
     - npm install
     - npm run build
   pages: true
