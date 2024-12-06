@@ -7,6 +7,6 @@ export default defineConfig({
   },
   sitemap: true,
   site: "https://www.cdmacdonald.com",
-  outDir: "dist",
-  publicDir: "public"
+  outDir: "public",
+  publicDir: "static"
 });

@@ -1,15 +1,21 @@
-image: node:lts
 
-deploy-pages:
+pages:
+  image: node:lts
+
+  before_script:
+    - npm ci
+
   cache:
     paths:
       - node_modules/
+
   script:
     - npm install
     - npm run build
-  pages: true
+
   artifacts:
     paths:
-      - dist
+      - public
+      
   only:
     - master
