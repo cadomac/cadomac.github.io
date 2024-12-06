@@ -2,9 +2,6 @@
 pages:
   image: node:lts
 
-  before_script:
-    - npm ci
-
   cache:
     paths:
       - node_modules/
@@ -16,6 +13,6 @@ pages:
   artifacts:
     paths:
       - public
-      
+
   only:
     - master
