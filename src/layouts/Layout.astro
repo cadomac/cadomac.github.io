@@ -9,6 +9,8 @@ const { title, isHome=false, currentPage } = Astro.props;
 import Header from '@components/Header.astro';
 import Nav from '@components/Nav.astro';
 import { slide, ViewTransitions } from 'astro:transitions';
+import faviconPng from '../static/favicon/favicon-96x96.png';
+import faviconSvg from '../static/favicon/favicon.svg';
 ---
 
 <!DOCTYPE html>
@@ -23,14 +25,19 @@ import { slide, ViewTransitions } from 'astro:transitions';
 		<meta name="application-name" content="Personal website of Cameron MacDonald">
 		<meta name="AdsBot-Google" content="noindex">
 		<meta name="twitter:title" content="Cameron MacDonald">
-		<meta name="twitter:image" content="https://cdmacdonald.com/cdmacdonald-favicon.png">
+		<meta name="twitter:image" content="https://cdmacdonald.com/favicon.ico">
 		<meta name="twitter:card" content="summary_large_image">
 		<link rel="canonical" href="http://cdmacdonald.com">
-		<link rel="icon" type="image/svg+xml" href="/cdmacdonald-favicon.png" />
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<meta name="apple-mobile-web-app-title" content="CDM" />
+		<link rel="manifest" href="/site.webmanifest" />
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,400;0,900;1,400&family=Red+Hat+Text:ital,wght@0,400;0,900;1,400&display=swap" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
+		<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,400;0,900;1,400&family=Red+Hat+Text:ital,wght@0,400;0,900;1,400&display=swap" rel="preload" as="style">
+		<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,400;0,900;1,400&family=Red+Hat+Text:ital,wght@0,400;0,900;1,400&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 		<meta name="generator" content={Astro.generator} />
 		<ViewTransitions />
 		<title>{title} | Cameron MacDonald</title>
@@ -41,11 +48,12 @@ import { slide, ViewTransitions } from 'astro:transitions';
 			<slot />
 		</main>
 		{
-		!isHome && 
-		<footer>
+			!isHome && 
+			<footer>
 			<Nav currentPage={currentPage} />
 		</footer>
 		}
+		<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=arrow_forward,expand_more,mail,open_in_new&display=swap" rel="stylesheet" />
 	</body>
 </html>
 <style lang="scss" is:global>
@@ -76,6 +84,9 @@ import { slide, ViewTransitions } from 'astro:transitions';
 		font-weight: normal;
 		font-style: normal;
 		font-size: 24px;
+		height: 24px;
+		width: 24px;
+		overflow: hidden;
 		line-height: 1;
 		letter-spacing: normal;
 		text-transform: none;

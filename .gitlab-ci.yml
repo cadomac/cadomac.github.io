@@ -1,12 +1,16 @@
 image: node:lts
 
-pages:
+deploy-pages:
   cache:
     paths:
       - node_modules/
   script:
+    # Build and compress public/
+    - find public -type f -4egex '.*\.\(css\|js\|html\|svg\|png\|jpg\)' -exec gzip -f -k {} \;
+    - find public -type f -4egex '.*\.\(css\|js\|html\|svg\|png\|jpg\)' -exec brotli -f -k {} \;
     - npm install
     - npm run build
+  pages: true
   artifacts:
     paths:
       - public
