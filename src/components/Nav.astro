@@ -12,10 +12,8 @@ const { currentPage } = Astro.props;
         >Resumé</a
     >
     <a class:list={{ current: currentPage === "work" }} href="/work">Work</a>
+    <a class:list={{ current: currentPage === "contact" }} href="/contact">Contact</a>
     <a class:list={{ current: currentPage === "blog" }} href="/blog">Blog</a>
-    <a class:list={{ current: currentPage === "contact" }} href="/contact"
-        >Contact</a
-    >
 </nav>
 
 <style lang="scss">
@@ -66,13 +64,17 @@ const { currentPage } = Astro.props;
                 color: $orange-web;
                 text-decoration: wavy underline;
                 text-underline-offset: 10px;
+
+                @media (prefers-color-scheme: light) {
+                    color: $pink-orange;
+                }
             }
 
             &:hover {
                 color: $pink-orange;
             }
 
-            &:focus {
+            &:focus-visible {
                 border-radius: 2px;
                 background: $pink-orange;
                 color: $blue-black;

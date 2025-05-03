@@ -1,7 +1,4 @@
 ---
-import {Content} from '../content/resume/resume.md';
-import Markdown from '@components/Markdown.astro';
-import * as skills from '../data/skills.json';
 import Layout from "../layouts/Layout.astro";
 ---
 
@@ -9,25 +6,8 @@ import Layout from "../layouts/Layout.astro";
   <div class="ResumeWrapper">
     <h2>Download</h2>
     <div class="DownloadsWrap">
-      <a href="/MacDonald_Resume_Latest.docx" download>DOCX</a>
-      <a href="/MacDonald_Resume_Latest.odt" download>ODT</a>
-      <a href="/MacDonald_Resume_Latest.pdf" download>PDF</a>
+      <a href="/MacDonald_Resume_2025_Q3_SE.pdf" download>PDF</a>
     </div>
-    <details class="ResumeCollapse">
-      <summary><span aria-hidden="true" class="material-symbols-rounded">expand_more</span> View web resume here</summary>
-      <Markdown Content={Content} />
-      <h3 id="skills">Skills</h3>
-      <ul id="skills-list">
-        {
-          skills && skills.skills.map((skill) => {
-            return (
-              <li class="skill-item">{skill}</li>
-            )
-          })
-        }
-      </ul>
-    </div>
-    </details>
 
 </Layout>
 
@@ -44,62 +24,23 @@ import Layout from "../layouts/Layout.astro";
     padding-bottom: 4rem;
     width: 100%;
 
-    & .ResumeCollapse {
-      appearance: none;
-
-      &[open] {
-        & .material-symbols-rounded {
-          rotate: 180deg;
-        }
-      }
-
-      & summary {
-        list-style-type: none;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        cursor: pointer;
-
-        & .material-symbols-rounded {
-          transition: rotate 0.15s ease-in-out;
-        }
-      }
-    }
-
     & a {
       color: $orange-web;
       font-weight: 900;
+      @media (prefers-color-scheme: light) {
+        color: $rose-pink;
+      }
       &:hover {
         color: $pink-orange;
+
+        @media (prefers-color-scheme: light) {
+          color: $blue-oxford;
+        }
       }
+      
 
       @media (prefers-reduced-motion: no-preference) {
         transition: color 0.15s ease-in-out;
-      }
-    }
-  }
-  #skills-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    gap: 2rem;
-    padding-left: 0;
-
-    @include mobile {
-      gap: 1rem;
-    }
-
-    & .skill-item {
-      list-style-type: none;
-      background-color: $orange;
-      color: $blue-black;
-      padding: 0.5rem 1rem;
-      border-radius: 10px;
-      font-weight: 900;
-
-      @include mobile {
-        font-size: 0.875rem;
-        padding: 0.25rem 0.5rem;
       }
     }
   }

@@ -1,30 +1,70 @@
 {
     "projects": [
         {
+            "name": "GitHub",
+            "category": "software",
+            "url": "https://github.com/cadomac",
+            "description": "Open source software",
+            "background": "github"
+        },
+        {
+            "name": "GitLab",
+            "category": "software",
+            "url": "https://gitlab.com/cadoma",
+            "description": "Open source software but it's a fox",
+            "background": "gitlab"
+        },
+        {
             "name": "Proton to KeePass",
+            "category": "software",
             "url": "https://github.com/cadomac/Proton-To-KeePass",
             "description": "Convert encrypted Proton Pass exports to KeePass databases",
             "background": "light-green"
         },
         {
             "name": "Fresh Eyes",
+            "category": "software",
             "url": "https://github.com/cadomac/Fresh-Eyes",
             "description": "Chrome extension to aid users with color vision deficiencies",
             "background": "rose-pink"
         },
         {
             "name": "postcss-hocus-pocus",
+            "category": "software",
             "url": "https://github.com/cadomac/postcss-hocus-pocus",
             "description": "Small extension for PostCSS to provide shorthand for :hover/:focus/:active selectors",
+            "background": "blue-light"
+        },
+        {
+            "name": "Printables",
+            "category": "hobby",
+            "url": "https://printables.com/@bigheadcam",
+            "description": "3D printables by me, hosted by Prusa",
             "background": "orange"
-        }
-    ],
-    "volunteer": [
+        },
+        {
+            "name": "CodePen",
+            "category": "software",
+            "url": "https://codepen.io/cadomac",
+            "description": "Front end playground and code samples",
+            "background": "codepen"
+        },
+        {
+            "name": "Behance",
+            "category": "creative",
+            "url": "https://behance.net/cadoma",
+            "description": "Graphic design, motion design, and 3D art portfolio",
+            "background": "behance"
+        },
         {
             "name": "Nice Moves MN",
+            "category": "volunteer",
             "url": "https://nicemoves.org/about",
             "description": "Non-profit support for animators and motion graphic artists in the Midwest",
             "background": "nicemoves"
         }
+    ],
+    "volunteer": [
+        
     ]
 }
