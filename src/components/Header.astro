@@ -82,10 +82,10 @@ const { isHome=false, currentPage } = Astro.props;
 				-webkit-background-clip: text;
 				-webkit-text-fill-color: transparent;
 				font-weight: 800;
-				padding: 1rem 2rem 1rem 2rem;
+				padding: 1rem 1.75rem 1rem 1.75rem;
 
 				margin: 0;
-        border-radius: 0 5px 5px 0;
+        border-radius: 5px;
 
         &:hover {
           -webkit-background-clip: initial;
@@ -110,8 +110,7 @@ const { isHome=false, currentPage } = Astro.props;
 			}
 
       & a:has(h1) {
-        &:focus-visible,
-        &:focus {
+        &:focus-visible {
           outline-color: $gradient-mix;
         }
 

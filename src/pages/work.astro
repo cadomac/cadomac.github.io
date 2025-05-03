@@ -3,43 +3,39 @@ import Layout from '../layouts/Layout.astro';
 import * as projectsJSON from '../data/projects.json';
 import Card from '@components/Card.astro';
 
+function capitalize(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 const projects = projectsJSON.projects
 const volunteer = projectsJSON.volunteer
+const categories = ["software", "creative", "volunteer", "hobby"]
 ---
 <Layout title="Work" currentPage="work">
   <div class="WorkWrapper">
     <h2>Projects</h2>
-    <div class="ProjectWrapper">
-      {
-        projects.map((project) => {
-          return (
-            <Card 
-            href={project.url} 
-            title={project.name} 
-            desc={project.description} 
-            background={project.background}
-            external
-            />
-          )
-        })
-      }
-    </div>
-    <h2>Volunteership</h2>
-    <div class="ProjectWrapper">
-      {
-        volunteer.map((project) => {
-          return (
-            <Card 
-            href={project.url} 
-            title={project.name} 
-            desc={project.description} 
-            background={project.background}
-            external
-            />
-          )
-        })
-      }
-    </div>
+    {
+      categories.map((category) => {
+        return (
+          <h3>{capitalize(category)}</h3>
+          <div class="ProjectWrapper">
+            {
+              projects.filter((project) => project.category === category).map((project) => {
+                return (
+                  <Card 
+                  href={project.url} 
+                  title={project.name} 
+                  desc={project.description} 
+                  background={project.background}
+                  external
+                  />
+                )
+              })
+            }
+          </div>
+        )
+      })
+    }    
   </div>
 </Layout>
 <style lang="scss">
