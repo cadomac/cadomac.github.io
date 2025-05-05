@@ -3,16 +3,30 @@ import Layout from '../layouts/Layout.astro';
 import * as projectsJSON from '../data/projects.json';
 import Card from '@components/Card.astro';
 
-function capitalize(string) {
+function capitalize(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 const projects = projectsJSON.projects
-const volunteer = projectsJSON.volunteer
 const categories = ["software", "creative", "volunteer", "hobby"]
 ---
 <Layout title="Work" currentPage="work">
   <div class="WorkWrapper">
+    <h2>Speaking Engagements</h2>
+    <div class="SpeakingWrapper">
+      <div class="SpeakingEntry">
+        <h3><a href="https://minnestar.org/event/minnebar19/">Minnebar19</a> - Accessibility: Adding "Why" to the "How"</h3>
+        <a target="_blank" href="https://docs.google.com/presentation/d/1Kf3H2WbK7tEu9ggoGl5Y6OfV-DYgf6zMGGIta_-QplM/edit?usp=sharing">Slides</a>
+      </div>
+      <div class="SpeakingEntry">
+        <h3><a href="https://minnestar.org/event/minnebar19/">Minnebar19</a> - 3D Printing: Getting Started</h3>
+        <a target="_blank" href="https://docs.google.com/presentation/d/1yIennoG7NwK6qwzn9NSX-T56UnMpyY0KARNh8c4TY3U/edit?usp=sharing">Slides</a>
+      </div>
+      <div class="SpeakingEntry">
+        <h3><a href="https://uxpamn.org/">UXPA MN</a> -World Usability Day 2024 - Designing for a Better World</h3>
+        <p>Panelist</p>
+      </div>
+    </div>
     <h2>Projects</h2>
     {
       categories.map((category) => {
@@ -35,7 +49,7 @@ const categories = ["software", "creative", "volunteer", "hobby"]
           </div>
         )
       })
-    }    
+    }
   </div>
 </Layout>
 <style lang="scss">
@@ -53,6 +67,20 @@ const categories = ["software", "creative", "volunteer", "hobby"]
 
     @include mobile {
       grid-template-columns: 1fr;
+    }
+  }
+
+  .SpeakingWrapper {
+    h3 {
+      margin-bottom: 0;
+      margin-top: 10px;
+    }
+
+    .SpeakingEntry {
+      p {
+        margin: 0;
+        font-weight: bold;
+      }
     }
   }
 </style>

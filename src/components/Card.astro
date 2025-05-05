@@ -28,6 +28,8 @@ import * as colorsJSON from "../data/colors.json";
 
 // @ts-ignore
 let colors: JSON["default"] = colorsJSON.default;
+let darkBgs = ["github", "behance"]
+const textColor = darkBgs.includes(background) ? colors.white : colors.black;
 
 const card_style = `
 	#${id} {
@@ -37,10 +39,11 @@ const card_style = `
 				&:hover,
 				&:focus-visible {
 					background: ${backgroundImg ? `url(${backgroundImg})` : colors[background]};
+					color: ${textColor};
 					z-index: 1;
 			
 					& > p {
-						color: ${colors.black};
+						color: ${textColor};
 					}
 				}
 
