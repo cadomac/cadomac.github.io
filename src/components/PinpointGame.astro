@@ -1,0 +1,164 @@
+---
+
+const words = [
+    'wart',
+    'warp',
+    'carp',
+    'card',
+    'hard',
+    'harp'
+]
+
+const wordHints = {
+    'wart': 'A gross lump of skin',
+    'warp': 'A ship in Star Trek does this', 
+    'carp': 'A fish',
+    'card': 'UNO is played with these',
+    'hard': 'Difficult or solid',
+    'harp': 'A large upright instrument'
+}
+---
+
+<div class="PinpointGame">
+    {
+        words.map((word, idx) => {
+            return (
+                <div class="Word">
+                    <input type="text" name="{word}-{idx}" data-hint={wordHints[word]} id="" maxlength="1" disabled={idx === 0 || idx === words.length - 1} />
+                    <input type="text" name="{word}-{idx}" data-hint={wordHints[word]} id="" maxlength="1" disabled={idx === 0 || idx === words.length - 1} />
+                    <input type="text" name="{word}-{idx}" data-hint={wordHints[word]} id="" maxlength="1" disabled={idx === 0 || idx === words.length - 1} />
+                    <input type="text" name="{word}-{idx}" data-hint={wordHints[word]} id="" maxlength="1" disabled={idx === 0 || idx === words.length - 1} />
+                </div>
+                )
+        })
+    }
+    <div class="HintArea">
+        <p class="Hint"></p>
+    </div>
+</div>
+
+<script>
+    const words = [
+        'wart',
+        'warp',
+        'carp',
+        'card',
+        'hard',
+        'harp'
+    ]
+
+    const wordHints = {
+        'wart': 'A gross lump of skin',
+        'warp': 'A ship in Star Trek does this', 
+        'carp': 'A fish',
+        'card': 'UNO is played with these',
+        'hard': 'Difficult or solid',
+        'harp': 'A large upright instrument'
+    }
+
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach((input, idx) => {
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Tab' || e.metaKey || e.shiftKey) {
+                return;
+            }
+            if ((e.key === 'Backspace' || e.key === 'Delete') && idx > 0) {
+                setTimeout(() => inputs[idx - 1].focus(), 50);
+            } else {
+                if (idx < inputs.length - 1) {
+                    setTimeout(() => inputs[idx + 1].focus(), 50);
+                }
+            }
+        })
+
+        input.addEventListener('input', () => {
+            const gameValid = validate();
+            if (gameValid) {
+                const wordLines = document.querySelectorAll('.Word');
+                const lastWordLine = wordLines[wordLines.length - 1];
+                const firstWordLine = wordLines[0];
+                firstWordLine.querySelectorAll('input').forEach((input) => {
+                    input.disabled = false;
+                })
+                lastWordLine.querySelectorAll('input').forEach((input) => {
+                    input.disabled = false;
+                })
+            }
+        })
+
+        input.addEventListener('focus', () => {
+            const hint = input.getAttribute('data-hint');
+            document.querySelector('.Hint').innerHTML = hint;
+        })
+    })
+
+    function validate() {
+        console.log('validating...')
+        let wordLines = Array.from(document.querySelectorAll('.Word'));
+        wordLines = wordLines.slice(1, wordLines.length - 1);
+        console.log(wordLines)
+        let valid = true;
+        wordLines.forEach((line, i) => {
+            if (!valid) {
+                return
+            }
+
+            const inputs = line.querySelectorAll('input');
+            const correctWord = words[i+1];
+            console.log(inputs, correctWord)
+            inputs.forEach((input, idx) => {
+                const inputValue = input.value;
+                if (inputValue !== correctWord[idx]) {
+                    valid = false
+                    return
+                }
+            })
+        })
+        return valid;
+    }
+</script>
+
+<style>
+    .PinpointGame {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        background-color: rgb(206, 206, 206);
+        min-width: 300px;
+        padding: 30px 10px;
+    }
+    .Hint {
+        color: rgb(54, 54, 54);
+        text-align: center;
+        width: 100%;
+    }
+    .Word {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        justify-content: space-between;
+        min-height: 40px;
+        background-color: rgb(186, 186, 186);
+        padding: 10px;
+
+        &:has(input:disabled) {
+            background-color: rgb(206, 206, 206);
+        }
+
+        input {
+            background-color: inherit;
+            border: 0;
+            border-bottom: 2px solid rgb(131, 131, 131);
+            max-width: 3ch;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            text-transform: uppercase;
+
+            &:focus-visible {
+                outline: none;
+                background-color: rgb(170, 170, 170);
+            }
+        }
+    }
+</style>
