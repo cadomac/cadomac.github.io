@@ -59,12 +59,17 @@
         {
             "name": "Nice Moves MN",
             "category": "volunteer",
-            "url": "https://nicemoves.org/about",
-            "description": "Non-profit support for animators and motion graphic artists in the Midwest",
+            "url": "https://nicemoves.org",
+            "description": "Support for animators and motion graphic artists in the Midwest",
             "background": "nicemoves"
+        },
+        {
+            "name": "HandsOn Twin Cities: Connected for Change",
+            "category": "volunteer",
+            "url": "https://www.handsontwincities.org/connected-for-change",
+            "description": "Consulting for non-profits as a volunteer technologist",
+            "background": "codepen"
         }
     ],
-    "volunteer": [
-        
-    ]
+    "volunteer": []
 }

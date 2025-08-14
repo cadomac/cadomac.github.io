@@ -1,36 +1,47 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Card from "@components/Card.astro";
-
 ---
 
 <Layout title="Contact" currentPage="contact">
-  <div class="ContactWrapper">
-    <h2>Email</h2>
-    <div class="ContactCardWrap">
-      <Card href="mailto:me@cdmacdonald.com" title="me@cdmacdonald.com" background="proton" desc="End-to-end encrypted email" external mail />
+    <div class="ContactWrapper">
+        <h2>Email</h2>
+        <div class="ContactCardWrap">
+            <Card
+                href="mailto:me@cdmacdonald.com"
+                title="me@cdmacdonald.com"
+                background="proton"
+                desc="End-to-end encrypted email"
+                external
+                mail
+            />
+        </div>
+        <h2>Social Media</h2>
+        <div class="ContactCardWrap">
+            <Card
+                background="linkedin"
+                title="LinkedIn"
+                desc={`"Professional" social media`}
+                href="https://www.linkedin.com/in/macdonaldcameron"
+                external
+            />
+        </div>
     </div>
-    <h2>Social Media</h2>
-    <div class="ContactCardWrap">
-      <Card background="linkedin" title="LinkedIn" desc={`"Professional" social media`} href="https://www.linkedin.com/in/macdonaldcameron" external />
-      <Card background="bluesky" title="Bluesky" desc="Pre-2015 Twitter" href="https://bsky.app/profile/cdmacdonald.com" external />
-    </div>
-  </div>
 </Layout>
 
 <style lang="scss">
-  @use "../../styles/breakpoints" as *;
-  .ContactWrapper {
-    width: 100%;
-  }
-
-  .ContactCardWrap {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 1rem;
-
-    @include mobile {
-      grid-template-columns: 1fr;
+    @use "../../styles/breakpoints" as *;
+    .ContactWrapper {
+        width: 100%;
     }
-  }
+
+    .ContactCardWrap {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 1rem;
+
+        @include mobile {
+            grid-template-columns: 1fr;
+        }
+    }
 </style>

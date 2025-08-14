@@ -1,34 +1,42 @@
 ---
 export interface Props {
-	href?: string,
-	title: string,
-	desc?: string,
-	background?: string,
-	backgroundImg?: string,
-	external?: boolean,
-	mail?: boolean
+    href?: string;
+    title: string;
+    desc?: string;
+    background?: string;
+    backgroundImg?: string;
+    external?: boolean;
+    mail?: boolean;
 }
 
-const { href, title, desc, background="off-white", backgroundImg, external=false, mail=false } = Astro.props;
+const {
+    href,
+    title,
+    desc,
+    background = "off-white",
+    backgroundImg,
+    external = false,
+    mail = false,
+} = Astro.props;
 
 const Tag = href ? "a" : "div";
 
-const id = title.replace(/\s|@|\./g, "");
+const id = title.replace(/\s|@|\.|:/g, "");
 
-type JSON = { 
-	white: Function,
-	black: Function,
-	orange: Function,
-	default: {
-		[key: string]: string
-	}
- };
+type JSON = {
+    white: Function;
+    black: Function;
+    orange: Function;
+    default: {
+        [key: string]: string;
+    };
+};
 
 import * as colorsJSON from "../data/colors.json";
 
 // @ts-ignore
 let colors: JSON["default"] = colorsJSON.default;
-let darkBgs = ["github", "behance"]
+let darkBgs = ["github", "behance"];
 const textColor = darkBgs.includes(background) ? colors.white : colors.black;
 
 const card_style = `
@@ -56,104 +64,115 @@ const card_style = `
 				outline: 3px solid ${colors[background]};
 				outline-offset: 3px;
 			}
-		}`
-
+		}`;
 ---
 
-<Tag class="Card" target={href && external ? "_blank" : null} id={id} href={href} aria-label={href ? `${title}, opens in new tab` : null}>
-	<style set:html={card_style} />
-	<h2>{title} <span class="material-symbols-rounded" aria-hidden="true">{external ? mail ? "mail" : "open_in_new" : "arrow_forward" }</span></h2>
-	<p>{desc}</p>
+<Tag
+    class="Card"
+    target={href && external ? "_blank" : null}
+    id={id}
+    href={href}
+    aria-label={href ? `${title}, opens in new tab` : null}
+>
+    <style set:html={card_style}></style>
+    <h2>
+        {title}
+        <span class="material-symbols-rounded" aria-hidden="true"
+            >{
+                external ? (mail ? "mail" : "open_in_new") : "arrow_forward"
+            }</span>
+    </h2>
+    <p>{desc}</p>
 </Tag>
 
 <style lang="scss">
-	@use "sass:color";
-	@use "../../styles/breakpoints" as *;
-	@use "../../styles/color" as *;
+    @use "sass:color";
+    @use "../../styles/breakpoints" as *;
+    @use "../../styles/color" as *;
 
-	@mixin cardColor($color, $pos) {
-		border: 3px solid $color;
+    @mixin cardColor($color, $pos) {
+        border: 3px solid $color;
 
-		@media (pointer: fine) {
-			&:hover,
-			&:focus-visible {
-				background-color: $color;
-				z-index: 1;
-		
-				& > p {
-					color: $black;
-				}
-			}
+        @media (pointer: fine) {
+            &:hover,
+            &:focus-visible {
+                background-color: $color;
+                z-index: 1;
 
-			@media (prefers-reduced-motion: no-preference) {
-				transition: background-color 0.2s ease-in-out;
-			}
-		}
+                & > p {
+                    color: $black;
+                }
+            }
 
-		&:focus-visible {
-			outline: 3px solid $color;
-			outline-offset: 3px;
-		}
-	}
+            @media (prefers-reduced-motion: no-preference) {
+                transition: background-color 0.2s ease-in-out;
+            }
+        }
 
-	a.Card {
-		position: relative;
-		container: card / inline-size;
-		$padding-br: 3rem;
-		$padding-tl: 1rem;
-		border-radius: 10px;
-		text-decoration: none;
-		color: $off-white;
-		padding: $padding-tl $padding-br $padding-br $padding-tl;
-		display: block;
-		transition: color 0.25s ease-in-out;
-		height: 100%;
+        &:focus-visible {
+            outline: 3px solid $color;
+            outline-offset: 3px;
+        }
+    }
 
-		@media (prefers-color-scheme: light) {
-			color: $black;
-		}
+    a.Card {
+        position: relative;
+        container: card / inline-size;
+        $padding-br: 3rem;
+        $padding-tl: 1rem;
+        border-radius: 10px;
+        text-decoration: none;
+        color: $off-white;
+        padding: $padding-tl $padding-br $padding-br $padding-tl;
+        display: block;
+        transition: color 0.25s ease-in-out;
+        height: 100%;
 
-		@include mobile {
-		padding-bottom: 2rem;
-		}
+        @media (prefers-color-scheme: light) {
+            color: $black;
+        }
 
-		@media (pointer: fine) {
-			&:hover,
-			&:focus-visible {
-				color: $black;
-			}
-		}
+        @include mobile {
+            padding-bottom: 2rem;
+        }
 
-		$id: var(--id);
+        @media (pointer: fine) {
+            &:hover,
+            &:focus-visible {
+                color: $black;
+            }
+        }
 
-		& > h2 {
-			display: flex;
-			align-items: center;
-			width: 100%;
-			font-weight: 400;
-			gap: 0.5rem;
-			margin: 0;
-			& > .material-symbols-rounded {
-				height: 1em;
-			}
+        $id: var(--id);
 
-			@include mobile {
-				font-size: 1.25rem;
-			}
-		}
+        & > h2 {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            font-weight: 400;
+            gap: 0.5rem;
+            margin: 0;
+            & > .material-symbols-rounded {
+                height: 1em;
+            }
 
-		& > p {
-			color: transparent;
-			transition: color 0.25s ease-in-out 0.1s;
-			margin: 0;
+            @include mobile {
+                font-size: 1.25rem;
+            }
+        }
 
-			@media (pointer: coarse) {
-				color: color.mix($black, $off-white, 50%);
-			}
+        & > p {
+            color: transparent;
+            transition: color 0.25s ease-in-out 0.1s;
+            margin: 0;
 
-			@include mobile {
-				font-size: 0.8rem;
-			}
-		}
-	}
+            @media (pointer: coarse) {
+                color: color.mix($black, $off-white, 50%);
+            }
+
+            @include mobile {
+                font-size: 0.8rem;
+            }
+        }
+    }
 </style>
