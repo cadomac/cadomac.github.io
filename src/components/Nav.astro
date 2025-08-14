@@ -9,10 +9,12 @@ const { currentPage } = Astro.props;
 <nav class="SiteNav">
     <div class="backdrop"></div>
     <a class:list={{ current: currentPage === "resume" }} href="/resume"
-        >Resumé</a
+        >Résumé</a
     >
     <a class:list={{ current: currentPage === "work" }} href="/work">Work</a>
-    <a class:list={{ current: currentPage === "contact" }} href="/contact">Contact</a>
+    <a class:list={{ current: currentPage === "contact" }} href="/contact"
+        >Contact</a
+    >
     <a class:list={{ current: currentPage === "blog" }} href="/blog">Blog</a>
 </nav>
 

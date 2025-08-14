@@ -3,45 +3,43 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="Resume" currentPage="resume">
-  <div class="ResumeWrapper">
-    <h2>Download</h2>
-    <div class="DownloadsWrap">
-      <a href="/MacDonald_Resume_2025_Q3_SE.pdf" download>PDF</a>
+    <div class="ResumeWrapper">
+        <h2>Download</h2>
+        <div class="DownloadsWrap">
+            <a href="/MacDonald_Resume_2025_Q4_v2.pdf" download>PDF</a>
+        </div>
     </div>
 
-</Layout>
-
-<style lang="scss">
-  @use "../../styles/_color.scss" as *;
-  @use "../../styles/_breakpoints.scss" as *;
-  .DownloadsWrap {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 2rem;
-
-  }
-  .ResumeWrapper {
-    padding-bottom: 4rem;
-    width: 100%;
-
-    & a {
-      color: $orange-web;
-      font-weight: 900;
-      @media (prefers-color-scheme: light) {
-        color: $rose-pink;
-      }
-      &:hover {
-        color: $pink-orange;
-
-        @media (prefers-color-scheme: light) {
-          color: $blue-oxford;
+    <style lang="scss">
+        @use "../../styles/_color.scss" as *;
+        @use "../../styles/_breakpoints.scss" as *;
+        .DownloadsWrap {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
         }
-      }
-      
+        .ResumeWrapper {
+            padding-bottom: 4rem;
+            width: 100%;
 
-      @media (prefers-reduced-motion: no-preference) {
-        transition: color 0.15s ease-in-out;
-      }
-    }
-  }
-</style>
+            & a {
+                color: $orange-web;
+                font-weight: 900;
+                @media (prefers-color-scheme: light) {
+                    color: $rose-pink;
+                }
+                &:hover {
+                    color: $pink-orange;
+
+                    @media (prefers-color-scheme: light) {
+                        color: $blue-oxford;
+                    }
+                }
+
+                @media (prefers-reduced-motion: no-preference) {
+                    transition: color 0.15s ease-in-out;
+                }
+            }
+        }
+    </style>
+</Layout>

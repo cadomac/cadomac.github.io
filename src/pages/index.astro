@@ -1,75 +1,80 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
+import Layout from "../layouts/Layout.astro";
+import Card from "../components/Card.astro";
 
 const links = [
-  {
-    name: "Resume",
-    url: "/resume", 
-    blurb: "experience",
-    color: "parchment"
-  },
-  {
-    name: "Work",
-    url: "/work",
-    blurb: "projects",
-    color: "orange-web"
-  },
-  {
-    name: "Blog",
-    url: "/blog",
-    blurb: "ramblings of a mad man",
-    color: "pink-orange"
-  },
-  {
-    name: "Contact",
-    url: "/contact",
-    blurb: "carrier pigeon preferably",
-    color: "blue-light"
-  }
-]
+    {
+        name: "Résumé",
+        url: "/resume",
+        blurb: "yes, i use the accent marks",
+        color: "parchment",
+    },
+    {
+        name: "Work",
+        url: "/work",
+        blurb: "projects, hobbies, general tomfoolery",
+        color: "orange-web",
+    },
+    {
+        name: "Blog",
+        url: "/blog",
+        blurb: "maybe some day, lol",
+        color: "pink-orange",
+    },
+    {
+        name: "Contact",
+        url: "/contact",
+        blurb: "carrier pigeon is preferred",
+        color: "blue-light",
+    },
+];
 ---
 
 <Layout title="Cameron MacDonald" isHome currentPage="home">
-  <div class="IndexWrap">
-    <p class="Intro">Check out my stuff</p>
-    <nav>
-      {
-        links.map((link) => {
-          return (
-            <Card href={link.url} title={link.name} desc={link.blurb} background={link.color} />
-          )
-        })
-      }
-    </nav>
-  </div>
+    <div class="IndexWrap">
+        <p class="Intro">Check out my stuff</p>
+        <nav>
+            {
+                links.map((link) => {
+                    return (
+                        <Card
+                            href={link.url}
+                            title={link.name}
+                            desc={link.blurb}
+                            background={link.color}
+                        />
+                    );
+                })
+            }
+        </nav>
+    </div>
 </Layout>
 
 <style lang="scss">
-  @use "../../styles/_color.scss" as *;
-  @use "../../styles/_breakpoints.scss" as *;
-  @use "sass:color";
+    @use "../../styles/_color.scss" as *;
+    @use "../../styles/_breakpoints.scss" as *;
+    @use "sass:color";
 
-  .IndexWrap {
-    width: 100%;
-    nav {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: 1fr 1fr 1fr;
-      gap: 1rem;
+    .IndexWrap {
+        width: 100%;
+        nav {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr 1fr;
+            gap: 1rem;
 
-      @include mobile {
-        grid-template-columns: 1fr;
-      }
+            @include mobile {
+                grid-template-columns: 1fr;
+            }
+        }
     }
-  }
 
-  .Intro {
-    font-size: 2rem;
-    @include mobile {
-      font-size: 1.25rem;
-      text-align: center;
-      margin-top: 0;
+    .Intro {
+        font-size: 2rem;
+        @include mobile {
+            font-size: 1.25rem;
+            text-align: center;
+            margin-top: 0;
+        }
     }
-  }
 </style>
