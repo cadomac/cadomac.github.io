@@ -1,4 +1,5 @@
 import { defineConfig } from 'astro/config';
+import compressor from "astro-compressor";
 
 // https://astro.build/config
 export default defineConfig({
@@ -8,5 +9,6 @@ export default defineConfig({
   sitemap: true,
   site: "https://www.cdmacdonald.com",
   outDir: "public",
-  publicDir: "static"
+  publicDir: "static",
+  integrations: [compressor()],
 });
