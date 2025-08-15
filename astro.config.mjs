@@ -1,4 +1,5 @@
 import { defineConfig } from 'astro/config';
+import compressor from 'astro-compressor'
 
 // https://astro.build/config
 export default defineConfig({
@@ -9,5 +10,8 @@ export default defineConfig({
   site: "https://www.cdmacdonald.com",
   outDir: "public",
   publicDir: "static",
-  integrations: [(await import("@playform/compress")).default()],
+  integrations: [
+    (await import("@playform/compress")).default(),
+    compressor()
+  ],
 });
