@@ -1,180 +1,192 @@
 ---
 export interface Props {
-  title: string;
-  isHome?: boolean;
-  currentPage: string;
+    title: string;
+    isHome?: boolean;
+    currentPage: string;
 }
 
 const { title, isHome = false, currentPage } = Astro.props;
 import Header from "@components/Header.astro";
 import Nav from "@components/Nav.astro";
-import { slide, ClientRouter } from "astro:transitions";
+import MNWidget from "@components/MNWidget.astro";
 ---
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="description"
-      content="The personal website of Cameron MacDonald, a front-end developer, UX designer, and accessibility specialist."
-    />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta name="color-scheme" content="light dark" />
-    <meta name="author" content="Cameron MacDonald" />
-    <meta
-      name="application-name"
-      content="Personal website of Cameron MacDonald"
-    />
-    <meta name="AdsBot-Google" content="noindex" />
-    <meta name="twitter:title" content="Cameron MacDonald" />
-    <meta name="twitter:image" content="https://cdmacdonald.com/favicon.ico" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <link rel="canonical" href="http://cdmacdonald.com" />
-    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <meta name="apple-mobile-web-app-title" content="CDM" />
-    <link rel="manifest" href="/site.webmanifest" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <meta name="generator" content={Astro.generator} />
-    <ClientRouter />
-    <title>{title} | Cameron MacDonald</title>
-  </head>
-  <body>
-    <Header isHome={isHome} currentPage={currentPage} />
-    <main transition:animate={slide({ duration: "0.5s" })}>
-      <slot />
-    </main>
-    {
-      !isHome && (
-        <footer>
-          <Nav currentPage={currentPage} />
-        </footer>
-      )
-    }
-    <link
-      href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,400;0,900;1,400&family=Red+Hat+Text:ital,wght@0,400;0,900;1,400&display=swap"
-      rel="preload"
-      as="style"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,400;0,900;1,400&family=Red+Hat+Text:ital,wght@0,400;0,900;1,400&display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media='all'"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=arrow_forward,expand_more,mail,open_in_new&display=swap"
-      rel="stylesheet"
-    />
-  </body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="description"
+            content="The personal website of Cameron MacDonald, a front-end developer, UX designer, and accessibility specialist."
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#000000" />
+        <meta name="color-scheme" content="light dark" />
+        <meta name="author" content="Cameron MacDonald" />
+        <meta
+            name="application-name"
+            content="Personal website of Cameron MacDonald"
+        />
+        <meta name="AdsBot-Google" content="noindex" />
+        <meta name="twitter:title" content="Cameron MacDonald" />
+        <meta
+            name="twitter:image"
+            content="https://cdmacdonald.com/favicon.ico"
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+        <link rel="canonical" href="http://cdmacdonald.com" />
+        <link
+            rel="icon"
+            type="image/png"
+            href="/favicon-96x96.png"
+            sizes="96x96"
+        />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/apple-touch-icon.png"
+        />
+        <meta name="apple-mobile-web-app-title" content="CDM" />
+        <link rel="manifest" href="/site.webmanifest" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <meta name="generator" content={Astro.generator} />
+        <title>{title} | Cameron MacDonald</title>
+    </head>
+    <body>
+        <Header isHome={isHome} currentPage={currentPage} />
+        <main>
+            <slot />
+        </main>
+        {
+            !isHome && (
+                <footer>
+                    <Nav currentPage={currentPage} />
+                </footer>
+            )
+        }
+        <link
+            href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,400;0,900;1,400&family=Red+Hat+Text:ital,wght@0,400;0,900;1,400&display=swap"
+            rel="preload"
+            as="style"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,400;0,900;1,400&family=Red+Hat+Text:ital,wght@0,400;0,900;1,400&display=swap"
+            rel="stylesheet"
+            media="print"
+            onload="this.media='all'"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=arrow_forward,expand_more,mail,open_in_new&display=swap"
+            rel="stylesheet"
+        />
+        <MNWidget />
+    </body>
 </html>
 <style lang="scss" is:global>
-  @use "sass:color";
-  @use "../../styles/_color.scss" as *;
-  @use "../../styles/_breakpoints.scss" as *;
+    @use "sass:color";
+    @use "../../styles/_color.scss" as *;
+    @use "../../styles/_breakpoints.scss" as *;
 
-  footer {
-    display: none;
+    footer {
+        display: none;
 
-    @include mobile {
-      display: flex;
-      position: fixed;
-      bottom: -25px;
-      height: 100px;
-      width: 100%;
-      justify-content: center;
+        @include mobile {
+            display: flex;
+            position: fixed;
+            bottom: -25px;
+            height: 100px;
+            width: 100%;
+            justify-content: center;
 
-      & > .SiteNav {
-        padding-top: 10px;
-      }
-    }
-  }
-
-  .material-symbols-rounded {
-    font-family: "Material Symbols Rounded";
-    font-weight: normal;
-    font-style: normal;
-    font-size: 24px;
-    height: 24px;
-    width: 24px;
-    overflow: hidden;
-    line-height: 1;
-    letter-spacing: normal;
-    text-transform: none;
-    display: inline-block;
-    white-space: nowrap;
-    word-wrap: normal;
-    direction: ltr;
-    -moz-font-feature-settings: "liga";
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  * {
-    box-sizing: border-box;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: antialiased;
-    -o-font-smoothing: antialiased;
-    font-smoothing: antialiased;
-    font-optical-sizing: auto;
-    &:not(h1, h2, h3, h4, h5, h6) {
-      font-family: "Red Hat Text", sans-serif;
-    }
-  }
-
-  *:focus-visible {
-    outline: 3px solid $off-white;
-    outline-offset: 3px;
-    border-radius: 2px;
-
-    @media (prefers-color-scheme: light) {
-      outline: 3px solid $black;
-    }
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: "Red Hat Display", "Trebuchet MS", sans-serif;
-  }
-
-  $bg-dark: $almost-black;
-  $bg-light: white;
-
-  html {
-    background-color: $bg-dark;
-
-    @media (prefers-color-scheme: light) {
-      background: $bg-light;
-    }
-  }
-
-  body {
-    background: $bg-dark;
-    margin: 0;
-    container: body / inline-size;
-
-    @media (prefers-color-scheme: light) {
-      background: $bg-light;
+            & > .SiteNav {
+                padding-top: 10px;
+            }
+        }
     }
 
-    @include mobile {
-      padding-bottom: 8rem;
+    .material-symbols-rounded {
+        font-family: "Material Symbols Rounded";
+        font-weight: normal;
+        font-style: normal;
+        font-size: 24px;
+        height: 24px;
+        width: 24px;
+        overflow: hidden;
+        line-height: 1;
+        letter-spacing: normal;
+        text-transform: none;
+        display: inline-block;
+        white-space: nowrap;
+        word-wrap: normal;
+        direction: ltr;
+        -moz-font-feature-settings: "liga";
+        -moz-osx-font-smoothing: grayscale;
     }
 
-    & main {
-      margin: 1rem auto 0 auto;
-      max-width: min(1280px, 90cqw);
-      display: flex;
-      justify-content: center;
-      gap: 3rem;
+    * {
+        box-sizing: border-box;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: antialiased;
+        -o-font-smoothing: antialiased;
+        font-smoothing: antialiased;
+        font-optical-sizing: auto;
+        &:not(h1, h2, h3, h4, h5, h6) {
+            font-family: "Red Hat Text", sans-serif;
+        }
     }
-  }
+
+    *:focus-visible {
+        outline: 3px solid $off-white;
+        outline-offset: 3px;
+        border-radius: 2px;
+
+        @media (prefers-color-scheme: light) {
+            outline: 3px solid $black;
+        }
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: "Red Hat Display", "Trebuchet MS", sans-serif;
+    }
+
+    $bg-dark: $almost-black;
+    $bg-light: white;
+
+    html {
+        background: $bg-dark;
+
+        @media (prefers-color-scheme: light) {
+            background: $bg-light;
+        }
+    }
+
+    body {
+        background: $bg-dark;
+        margin: 0;
+        container: body / inline-size;
+
+        @media (prefers-color-scheme: light) {
+            background: $bg-light;
+        }
+
+        @include mobile {
+            padding-bottom: 8rem;
+        }
+
+        & main {
+            margin: 1rem auto 0 auto;
+            max-width: min(1280px, 90cqw);
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+        }
+    }
 </style>
