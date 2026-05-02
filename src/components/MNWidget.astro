@@ -232,7 +232,7 @@
         align-items: flex-end;
 
         @media (max-width: 480px) {
-            bottom: 16px;
+            bottom: 4px;
             right: 50%;
             transform: translateX(50%);
         }
@@ -263,8 +263,10 @@
         font-weight: 600;
 
         @media (max-width: 480px) {
-            height: 40px;
-            font-size: 0.8rem;
+            height: 20px;
+            padding-left: 8px;
+            padding-right: 0;
+            font-size: 0.5rem;
         }
     }
     .sh-fab svg {
@@ -272,6 +274,11 @@
         height: 24px;
         fill: currentColor;
         flex-shrink: 0;
+
+        @media (max-width: 480px) {
+            height: 12px;
+            width: 12px;
+        }
     }
     .sh-fab-icon {
         width: 40px;
@@ -284,8 +291,9 @@
         flex-shrink: 0;
         color: var(--sh-water);
         @media (max-width: 480px) {
-            width: 28px;
-            height: 28px;
+            width: 18px;
+            height: 18px;
+            transform: translateX(-1px);
         }
     }
     .sh-fab-icon svg {
@@ -293,8 +301,9 @@
         height: 20px;
 
         @media (max-width: 480px) {
-            width: 16px;
-            height: 16px;
+            width: 12px;
+            height: 12px;
+            transform: translateX(1px);
         }
     }
     .sh-fab:hover {
