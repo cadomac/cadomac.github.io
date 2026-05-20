@@ -1,3 +1,3 @@
-# cadoma.gitlab.io
+# cdmacdonald.com - Personal Website
 
-Portfolio website
+This is a repo that hosts my personal website and blog.
