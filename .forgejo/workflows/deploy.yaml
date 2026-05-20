@@ -1,4 +1,4 @@
-name: 'Deploy to BunnyCDN'
+name: 'Deploy to Codeberg Pages'
 
 on:
   push:
@@ -8,48 +8,15 @@ on:
 jobs:
   build:
     runs-on: codeberg-tiny
-    container:
-      image: node:22-bookworm
     steps:
-      - name: Clone the repository
-        uses: https://code.forgejo.org/actions/checkout@v4
-        with:
-          submodules: recursive
-          fetch-depth: 0
-      - name: Generate static files with Astro
-        run: |
-          pnpm build
-      - name: Upload generated files
-        uses: https://code.forgejo.org/actions/upload-artifact@v3
-        with:
-          name: cdn-content
-          path: cdn/
+      - uses: actions/checkout@v4
+      - run: |
+            pnpm build
   deploy:
-    needs: [ build ]
     runs-on: codeberg-tiny
-    container:
-      image: node:22-bookworm
     steps:
-      - name: Restore artifact
-        uses: https://code.forgejo.org/actions/download-artifact@v3
+      - uses: https://codeberg.org/git-pages/action@v2
         with:
-          name: cdn-content
-          path: cdn/
-      - name: Install duck.sh
-        run: |
-          echo "deb https://s3.amazonaws.com/repo.deb.cyberduck.io stable main" | tee /etc/apt/sources.list.d/cyberduck.list > /dev/null
-          apt-key adv --keyserver keyserver.ubuntu.com --recv-keys FE7097963FEFBE72
-          apt-get update
-          apt-get install duck
-      - name: Deploy to Bunny.net
-        run: |
-          duck -y \
-                --username ${{ secrets.BUNNYNET_USERNAME }} \
-                --password ${{ secrets.BUNNYNET_DEPLOY_KEY }} \
-                --existing overwrite \
-                --upload ftps://storage.bunnycdn.com/ ./cdn/
-      - name: Purge pull zone
-        run: |
-          curl -X POST \
-                -H "AccessKey: ${{ secrets.BUNNYNET_API_KEY }}" \
-                https://api.bunny.net/pullzone/${{ secrets.BUNNYNET_PULL_ZONE_ID }}/purgeCache
+          site: 'https://bigheadcam.codeberg.page/cdmacdonald.com/'
+          token: ${{ forge.token }}
+          source: public/
