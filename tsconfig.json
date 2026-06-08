@@ -1,7 +1,7 @@
 {
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
-    "target": "ES6",
+    "target": "ESNext",
     "esModuleInterop": true,
     "baseUrl": "./",
     "paths": {

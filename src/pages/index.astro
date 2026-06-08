@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Card from "../components/Card.astro";
+import ResumeIcon from "@components/ResumeIcon.astro";
 
 const links = [
     {
@@ -33,7 +33,7 @@ const links = [
 <Layout title="Cameron MacDonald" isHome currentPage="home">
     <div class="IndexWrap">
         <p class="Intro">Check out my stuff</p>
-        <nav>
+        <!-- <nav>
             {
                 links.map((link) => {
                     return (
@@ -46,35 +46,10 @@ const links = [
                     );
                 })
             }
-        </nav>
+        </nav> -->
+        <ResumeIcon />
     </div>
 </Layout>
 
-<style lang="scss">
-    @use "../../styles/_color.scss" as *;
-    @use "../../styles/_breakpoints.scss" as *;
-    @use "sass:color";
-
-    .IndexWrap {
-        width: 100%;
-        nav {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 1fr 1fr 1fr;
-            gap: 1rem;
-
-            @include mobile {
-                grid-template-columns: 1fr;
-            }
-        }
-    }
-
-    .Intro {
-        font-size: 2rem;
-        @include mobile {
-            font-size: 1.25rem;
-            text-align: center;
-            margin-top: 0;
-        }
-    }
+<style>
 </style>

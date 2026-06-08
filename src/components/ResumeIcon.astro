@@ -1,0 +1,43 @@
+---
+import Icon from "../svgs/resume_icon.svg";
+const iconSize = 256
+---
+
+
+<Icon id="resume-icon" height={iconSize} width={iconSize} />
+
+<script>
+    import { animate } from 'motion';
+    const lines = document.querySelectorAll('#resume-icon .line');
+    const lineOne = document.querySelector('#resume-icon .line.first')
+
+    animate(
+        lineOne,
+        {
+            d: "M265.079,225.719L814.921,225.719"
+        },
+        {
+            duration: 0.5,
+            ease: "backOut"
+        }
+    )
+
+    lines.forEach((line, index) => {
+        const mRegex = /M\d{3}\.\d{3},\d{3}.\d{3}/
+        const lRegex = /L\d{3}\.\d{3},\d{3}.\d{3}/
+        const linePath = line.getAttribute('d') || ""
+        const m = mRegex.exec(linePath)
+        const l = lRegex.exec(linePath)[0]
+        animate(
+            line,
+            {
+                d: `${m}L814.921,${l?.slice(l.indexOf(',') + 1)}`
+            },
+            {
+                duration: 0.5,
+                ease: "circOut",
+                delay: 0.2 * index
+            }
+        )
+    })
+</script>
