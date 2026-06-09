@@ -1,43 +1,98 @@
 ---
 import Icon from "../svgs/resume_icon.svg";
-const iconSize = 256
+const iconSize = 256;
 ---
-
 
 <Icon id="resume-icon" height={iconSize} width={iconSize} />
 
+<style>
+    .line {
+        stroke-color: rgb(0 0 0 / 0);
+    }
+</style>
 <script>
-    import { animate } from 'motion';
-    const lines = document.querySelectorAll('#resume-icon .line');
-    const lineOne = document.querySelector('#resume-icon .line.first')
+    import { animate, motionValue, svgEffect, stagger, hover } from "motion";
+    const icon = document.querySelector("#resume-icon");
+    const lines = document.querySelectorAll("#resume-icon .line");
+    const pageOutline = document.querySelector(
+        "#resume-icon > path:first-of-type",
+    );
+    const pathOffset = motionValue(0.82);
 
-    animate(
-        lineOne,
-        {
-            d: "M265.079,225.719L814.921,225.719"
-        },
-        {
-            duration: 0.5,
-            ease: "backOut"
-        }
-    )
+    const animation = (reversed: boolean = false) => {
+        const linesArr = [...lines];
+        const pathArr = [0, 1];
+        const startValue = motionValue(reversed ? 1 : 0);
+        const pathLength = startValue;
+        const targetOpacity = reversed ? 0 : 1;
 
-    lines.forEach((line, index) => {
-        const mRegex = /M\d{3}\.\d{3},\d{3}.\d{3}/
-        const lRegex = /L\d{3}\.\d{3},\d{3}.\d{3}/
-        const linePath = line.getAttribute('d') || ""
-        const m = mRegex.exec(linePath)
-        const l = lRegex.exec(linePath)[0]
-        animate(
-            line,
+        reversed && pathArr.reverse();
+        reversed && linesArr.reverse();
+
+        svgEffect(pageOutline, {
+            pathLength,
+            pathOffset,
+        });
+        const pathLengthSequence = [
+            pathLength,
+            pathArr,
+            { duration: 1.8, ease: "easeInOut" },
+        ];
+        const opacitySequence = [
+            pageOutline,
+            { opacity: targetOpacity },
             {
-                d: `${m}L814.921,${l?.slice(l.indexOf(',') + 1)}`
+                duration: 1,
+                ease: "easeInOut",
+                at: reversed ? 0.95 : 0.2,
             },
-            {
-                duration: 0.5,
-                ease: "circOut",
-                delay: 0.2 * index
+        ];
+        const fullSequence = [pathLengthSequence, opacitySequence];
+        animate(fullSequence);
+
+        linesArr.forEach((line, index) => {
+            const mRegex = /M\d{3}\.\d{3},\d{3}.\d{3}/;
+            const lRegex = /L\d{3}\.\d{3},\d{3}.\d{3}/;
+            const linePath = line.getAttribute("d") || "";
+
+            const m = linePath.slice(0, linePath.indexOf("L"));
+            const l = linePath.slice(linePath.indexOf("L"));
+            let lineX = "814.921";
+            if (reversed) {
+                lineX = m.slice(1, 8);
             }
-        )
-    })
+
+            console.log("lineX", lineX);
+            const lineSequence = [
+                line,
+                {
+                    d: `${m}L${lineX},${l?.slice(l.indexOf(",") + 1)}`,
+                },
+                {
+                    duration: 0.8,
+                    ease: "circOut",
+                    delay: 0.25 * (index + 1),
+                },
+            ];
+            const opacitySequence = [
+                line,
+                {
+                    opacity: targetOpacity,
+                },
+                {
+                    duration: reversed ? 0.25 : 1,
+                    ease: "circOut",
+                    delay: (reversed ? 0.3 : 0.2) * (index + 1),
+                    at: reversed ? 0.5 : 0,
+                },
+            ];
+            animate([lineSequence, opacitySequence]);
+        });
+    };
+
+    hover(icon, (element) => {
+        animation();
+
+        return () => animation(true);
+    });
 </script>
