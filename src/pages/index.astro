@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ResumeIcon from "@components/ResumeIcon.astro";
+import HeroButton from "@components/HeroButton.astro";
 
 const links = [
     {
@@ -47,7 +48,10 @@ const links = [
                 })
             }
         </nav> -->
-        <ResumeIcon />
+        <HeroButton>
+            <p>Resume</p>
+            <ResumeIcon />
+        </HeroButton>
     </div>
 </Layout>
 

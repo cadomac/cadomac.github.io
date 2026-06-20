@@ -1,0 +1,81 @@
+<button class="HeroButton">
+    <div class="overlay"></div>
+    <slot />
+</button>
+
+<style>
+    button {
+        --boxShadowColor: rgb(0 0 0 / 0.4);
+        appearance: none;
+        border: none;
+        padding: 10px;
+        padding-bottom: 20px;
+        border-radius: 30px;
+        background-color: #eee;
+        height: 220px;
+        overflow: hidden;
+        box-shadow: 0 8px var(--boxShadowColor);
+        transition:
+            transform 0.3s ease-out,
+            box-shadow 0.3s ease-out;
+        position: relative;
+
+        &:hover {
+            transform: translateY(4px);
+            box-shadow: 0 4px var(--boxShadowColor);
+            cursor: pointer;
+        }
+    }
+
+    .overlay {
+        position: absolute;
+        left: 0;
+        top: 0;
+        border-radius: 30px;
+        width: 100%;
+        height: 220px;
+        box-shadow: 0 0 40px 20px #eee inset;
+        z-index: 1;
+        pointer-events: none;
+    }
+</style>
+
+<style is:global>
+    .HeroButton {
+        & p {
+            font-family: "Quicksand";
+            font-size: 2rem;
+            font-weight: 700;
+            padding: 0;
+            margin: 0;
+            transform: translateY(10px);
+        }
+        & svg {
+            transition: transform 2s cubic-bezier(0.19, 1, 0.22, 1);
+            transform: translateY(110px);
+        }
+
+        &:hover,
+        &:focus-visible {
+            svg {
+                transform: translateY(0px);
+            }
+        }
+    }
+</style>
+
+<script>
+    import { hover } from "motion";
+    import { animateResumeIcon } from "src/utils/animation";
+    const button = document.querySelector(".HeroButton");
+    const lines = document.querySelectorAll("#resume-icon .line");
+
+    button?.addEventListener("focus", () => animateResumeIcon(lines));
+    button?.addEventListener("blur", () => animateResumeIcon(lines, true));
+
+    hover(button, (element) => {
+        animateResumeIcon(lines);
+
+        return () => animateResumeIcon(lines, true);
+    });
+</script>
