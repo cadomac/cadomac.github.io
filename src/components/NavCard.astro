@@ -1,0 +1,82 @@
+---
+export interface Props {
+    title: string;
+    currentPage: string;
+}
+
+const {
+    title = "card title",
+    currentPage
+} = Astro.props;
+
+// const id = title.replace(/\s|@|\.|:/g, "");
+
+type JSON = {
+    white: Function;
+    black: Function;
+    orange: Function;
+    default: {
+        [key: string]: string;
+    };
+};
+
+---
+
+<a
+    class=`NavCard ${currentPage === title && 'current'}`
+    href={`/${title}`}
+>
+    <span class="title">
+        {title}
+    </span>
+</a>
+
+<style>
+    .NavCard {
+        --shadow-color: #000;
+        --bg-color: yellow;
+    
+        @media (prefers-color-scheme: dark) {
+            --shadow-color: white;
+            --bg-color: hotpink;
+        }
+        display: flex;
+        flex-direction: column;
+        padding: 0 10px;
+        border: 2px solid var(--shadow-color);
+        box-shadow: 2px 2px 0 0 var(--shadow-color);
+        transition: box-shadow 0.1s ease, translate 0.1s ease, transform 0.1s ease, color 0.1s ease;
+        text-decoration: none;
+        color: currentColor;
+        position: relative;
+        overflow: hidden;
+
+        &.current {
+            background-color: var(--bg-color);
+        }
+
+        &:hover,
+        &:focus-visible {
+            box-shadow: 3px 3px 0 0 var(--shadow-color);
+            cursor: pointer;
+            transform: skew(-1deg, 0);
+
+            .title,
+            .desc {
+                transform: skew(-2deg, 0);
+            }
+        }
+
+        &:focus-visible {
+            outline: 3px dashed var(--shadow-color);
+            outline-offset: -6px;
+        }
+        
+        .title {
+            display: flex;
+            transition: all 0.1s ease;
+            align-items: center;
+            margin: 0;
+        }
+    }
+</style>

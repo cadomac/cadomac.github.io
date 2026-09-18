@@ -1,7 +1,7 @@
 ---
 export interface Props {
     href?: string;
-    title: string;
+    title?: string;
     desc?: string;
     background?: string;
     backgroundImg?: string;
@@ -11,7 +11,7 @@ export interface Props {
 
 const {
     href,
-    title,
+    title = "card title",
     desc,
     background = "off-white",
     backgroundImg,
@@ -21,7 +21,7 @@ const {
 
 const Tag = href ? "a" : "div";
 
-const id = title.replace(/\s|@|\.|:/g, "");
+// const id = title.replace(/\s|@|\.|:/g, "");
 
 type JSON = {
     white: Function;
@@ -32,147 +32,154 @@ type JSON = {
     };
 };
 
-import * as colorsJSON from "../data/colors.json";
-
-// @ts-ignore
-let colors: JSON["default"] = colorsJSON.default;
-let darkBgs = ["github", "behance"];
-const textColor = darkBgs.includes(background) ? colors.white : colors.black;
-
-const card_style = `
-	#${id} {
-			border: 3px solid ${colors[background]};
-
-			@media (pointer: fine) {
-				&:hover,
-				&:focus-visible {
-					background: ${backgroundImg ? `url(${backgroundImg})` : colors[background]};
-					color: ${textColor};
-					z-index: 1;
-			
-					& > p {
-						color: ${textColor};
-					}
-				}
-
-				@media (prefers-reduced-motion: no-preference) {
-					transition: background-color 0.2s ease-in-out;
-				}
-			}
-
-			&:focus-visible {
-				outline: 3px solid ${colors[background]};
-				outline-offset: 3px;
-			}
-		}`;
 ---
 
 <Tag
     class="Card"
     target={href && external ? "_blank" : null}
-    id={id}
     href={href}
     aria-label={href ? `${title}, opens in new tab` : null}
 >
-    <style set:html={card_style}></style>
-    <h2>
+    <div class="bg-color-swipe">
+        <div class="bg-stripe">
+            <div class="bg-stripe-seg-1" />
+            <div class="bg-stripe-seg-2" />
+            <div class="bg-stripe-seg-3" />
+            <div class="bg-stripe-seg-1" />
+            <div class="bg-stripe-seg-2" />
+            <div class="bg-stripe-seg-3" />
+        </div>
+    </div>
+    <h2 class="title">
         {title}
-        <span class="material-symbols-rounded" aria-hidden="true"
-            >{
-                external ? (mail ? "mail" : "open_in_new") : "arrow_forward"
-            }</span>
     </h2>
-    <p>{desc}</p>
+    {desc && <p class="desc">{desc}</p>}
 </Tag>
 
-<style lang="scss">
-    @use "sass:color";
-    @use "../../styles/breakpoints" as *;
-    @use "../../styles/color" as *;
+<style>
+    @keyframes scroll-loop {
+        0% {
+            left: -112%;
+        }
 
-    @mixin cardColor($color, $pos) {
-        border: 3px solid $color;
+        100% {
+            left: 0%;
+        }
+    }
+    .Card {
+        --shadow-color: #000;
+        --bg-color: yellow;
+    
+        @media (prefers-color-scheme: dark) {
+            --shadow-color: white;
+            --bg-color: hotpink;
+        }
+        display: flex;
+        flex-direction: column;
+        width: 40cqw;
+        height: auto;
+        max-width: 400px;
+        max-height: 200px;
+        min-height: 100px;
+        padding: 10px;
+        border: 2px solid var(--shadow-color);
+        box-shadow: 6px 6px 0 0 var(--shadow-color);
+        transition: box-shadow 0.1s ease, translate 0.1s ease, transform 0.1s ease, color 0.1s ease;
+        text-decoration: none;
+        color: currentColor;
+        position: relative;
+        overflow: hidden;
 
-        @media (pointer: fine) {
-            &:hover,
-            &:focus-visible {
-                background-color: $color;
-                z-index: 1;
+        @media (max-width: 500px) {
+            width: 100%;
+        }
 
-                & > p {
-                    color: $black;
-                }
+        &:hover,
+        &:focus-visible {
+            box-shadow: 10px 10px 0 0 var(--shadow-color);
+            cursor: pointer;
+            translate: -2px -2px;
+            transform: skew(-1deg, 0);
+
+            .title,
+            .desc {
+                transform: skew(-2deg, 0);
             }
 
-            @media (prefers-reduced-motion: no-preference) {
-                transition: background-color 0.2s ease-in-out;
+            .bg-color-swipe {
+                top: 0;
+
+                .bg-stripe {
+                    
+                }
             }
         }
 
         &:focus-visible {
-            outline: 3px solid $color;
-            outline-offset: 3px;
-        }
-    }
-
-    a.Card {
-        position: relative;
-        container: card / inline-size;
-        $padding-br: 3rem;
-        $padding-tl: 1rem;
-        border-radius: 10px;
-        text-decoration: none;
-        color: $off-white;
-        padding: $padding-tl $padding-br $padding-br $padding-tl;
-        display: block;
-        transition: color 0.25s ease-in-out;
-        height: 100%;
-
-        @media (prefers-color-scheme: light) {
-            color: $black;
+            outline: 3px dashed var(--shadow-color);
+            outline-offset: -6px;
         }
 
-        @include mobile {
-            padding-bottom: 2rem;
-        }
+        .bg-color-swipe {
+            background-color: var(--bg-color);
+            position: absolute;
+            display: block;
+            height: 100%;
+            width: 100%;
+            top: 100%;
+            left: 0;
+            transition: top 0.2s ease;
+            z-index: -1;
+            
 
-        @media (pointer: fine) {
-            &:hover,
-            &:focus-visible {
-                color: $black;
+            .bg-stripe {
+                display: flex;
+                width: 220%;
+                height: calc(1cqw + 10px);
+                position: absolute;
+                top: calc(82% - 1cqw);
+                left: -100px;
+                gap: 2cqw;
+                animation: scroll-loop 5s linear forwards infinite;
+                
+
+                [class*="seg"] {
+                    background-color: var(--shadow-color);
+                    transform: skew(-34deg, 0);
+                    display: flex;
+                    gap:0;
+
+                    .material-symbols-rounded {
+                        display: block;
+                        width: fit-content;
+                    }
+                }
+                
+                .bg-stripe-seg-1 {
+                    width: 50%;
+                }
+                .bg-stripe-seg-2 {
+                    width: 30%;
+                }
+                .bg-stripe-seg-3 {
+                    width: 20%;
+                }
             }
         }
 
-        $id: var(--id);
+        .title,
+        .desc {
+            transition: all 0.1s ease;
+        }
 
-        & > h2 {
+        .title {
             display: flex;
             align-items: center;
-            width: 100%;
-            font-weight: 400;
-            gap: 0.5rem;
             margin: 0;
-            & > .material-symbols-rounded {
-                height: 1em;
-            }
-
-            @include mobile {
-                font-size: 1.25rem;
-            }
         }
 
-        & > p {
-            color: transparent;
-            transition: color 0.25s ease-in-out 0.1s;
-            margin: 0;
-
-            @media (pointer: coarse) {
-                color: color.mix($black, $off-white, 50%);
-            }
-
-            @include mobile {
-                font-size: 0.8rem;
-            }
+        .desc {
+            margin-top: 0;
         }
     }
 </style>

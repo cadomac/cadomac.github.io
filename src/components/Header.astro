@@ -2,136 +2,46 @@
 import Nav from './Nav.astro';
 
 export interface Props {
-  isHome?: boolean,
-  currentPage: string
+  show?: boolean;
+  currentPage: string;
+  navLinks: string[];
 }
 
-const { isHome=false, currentPage } = Astro.props;
+const { show=false, currentPage, navLinks } = Astro.props;
 ---
 
 <header>
-  <a href="/"><h1>Cameron MacDonald</h1></a>
-  <div class="backdrop"></div>
+  <a class="home-link" href="/"><h1>cdm</h1></a>
   <div class="NavWrap">
-    {
-      !isHome && <Nav currentPage={currentPage} />
-    }
+    <Nav currentPage={currentPage} navLinks={navLinks} />
   </div>
 </header>
 
-<style lang="scss">
-  @use "../../styles/_color.scss" as *;
-  @use "../../styles/_breakpoints.scss" as *;
-  @use "sass:color";
-  body {
-    & > header {
-			display: flex;
-			align-items: center;
-			gap: 2rem;
-			position: sticky;
-      margin-top: 20px;
-      margin-left: auto;
-      margin-right: auto;
-      top: 0;
-			width: 100%;
-      z-index: 1;
+<style>
+  header {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    padding: 10px 20px;
 
-      max-width: min(1345px, 100%);
-
-      & > .backdrop {
-        display: none;
-        @include mobile {
-          display: block;
-          position: absolute;
-          inset: 0;
-          $extended-by: 0px;
-          bottom: calc(-1 * $extended-by);
-          $cutoff: calc(100% - $extended-by);
-          -webkit-mask-image: linear-gradient(
-              to bottom,
-              black 0,
-              black $cutoff,
-              transparent $cutoff
-          );
-          pointer-events: none;
-
-          $blur: 7px;
-          backdrop-filter: blur($blur);
-          -webkit-backdrop-filter: blur($blur);
-          z-index: -1;
-        }
-      }
-
-      @include mobile {
-        justify-content: center;
-        gap: 0;
-        margin-top: 0;
-
-        & > .NavWrap {
-          display: none;
-        }
-      }
-      & > a {
-        text-decoration: none;
-      }
-      $gradient-mix: color.mix($rose-pink, $orange, 50%);
-      $background-gradient: linear-gradient(90deg, $rose-pink, $gradient-mix, $rose-pink);
-			& > a > h1 {
-				background: $background-gradient;
-				background-size: 400% 100%;
-				-webkit-background-clip: text;
-				-webkit-text-fill-color: transparent;
-				font-weight: 800;
-				padding: 1rem 1.75rem 1rem 1.75rem;
-
-				margin: 0;
-        border-radius: 5px;
-
-        &:hover {
-          -webkit-background-clip: initial;
-          -webkit-text-fill-color: $black;
-
-          @media (prefers-color-scheme: light) {
-            -webkit-text-fill-color: $white;
-          }
-        }
-
-				@media (prefers-reduced-motion: no-preference) {
-					animation: headingBgSlide 15s ease-in-out infinite;
-					transition: color 0.2s ease-in-out,
-          -webkit-background-clip 0.4s ease-in-out,
-          -webkit-text-fill-color 0.2s ease-in-out,
-					background 0.2s ease-in-out;			
-				}
-
-        @include mobile {
-          font-size: 1.5rem;
-        }
-			}
-
-      & a:has(h1) {
-        &:focus-visible {
-          outline-color: $gradient-mix;
-        }
-
-        @include mobile {
-          width: 100%;
-          text-align: center;
-          & h1:hover {
-            border-radius: 0;
-          }
-        }
-      }
-		}
+    @media (max-width: 500px) {
+      gap: 10px;
+      flex-direction: column;
+      justify-content: center;
+    }
   }
+  .home-link {
+    text-decoration-style: dashed !important;
+    text-decoration-thickness: 4px;
+    color: currentColor;
 
-  @keyframes headingBgSlide {
-		0% {
-			background-position: 0% 50%;
-		}
-
-		100% {
-			background-position: -400% 50%;
-		}
-	}
+    &:focus-visible {
+      outline-offset: 0;
+      outline-style: dashed;
+    }
+    h1 {
+      font-size: 20px;
+      margin: 0;
+    }
+  }
 </style>

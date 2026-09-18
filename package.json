@@ -15,5 +15,5 @@
     "astro-compressor": "^1.1.2",
     "sass": "^1.90.0"
   },
-  "packageManager": "pnpm@12.3.4"
+  "packageManager": "pnpm@12.4.1"
 }
