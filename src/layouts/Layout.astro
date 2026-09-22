@@ -74,13 +74,6 @@ const navLinks = [
         <main>
             <slot />
         </main>
-        {
-            !isHome && (
-                <footer>
-                    <Nav currentPage={currentPage} navLinks={navLinks} />
-                </footer>
-            )
-        }
         <link
             href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,400;0,900;1,400&family=Red+Hat+Text:ital,wght@0,400;0,900;1,400&display=swap"
             rel="preload"
@@ -96,6 +89,7 @@ const navLinks = [
             href={`https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=${icons.sort().join(",")}&display=swap`}
             rel="stylesheet"
         />
+        <link href="https://fonts.googleapis.com/css2?family=Geist+Pixel&display=swap" rel="stylesheet">
     </body>
 </html>
 <style is:global>
@@ -135,6 +129,30 @@ const navLinks = [
         -moz-osx-font-smoothing: grayscale;
     }
 
+    :root {
+        --contrast-color: black;
+        --contrast-text-color: white;
+        --terminal-green: #258F14;
+        --hot-pink: hotpink;
+        --banana-cream: #FFE747;
+        --petal-pink: #C45BAA;
+        --ink-black: #0C1618;
+        --coffee-bean: #1B130E;
+        --snow: #FFFBFF;
+
+        --bg-color: var(--snow);
+        --bright-contrast-color: var(--banana-cream);
+        --bright-contrast-color-inverse: var(--petal-pink);
+
+        @media (prefers-color-scheme: dark) {
+            --contrast-color: white;
+            --contrast-text-color: black;
+            --bg-color: var(--coffee-bean);
+            --bright-contrast-color: var(--petal-pink);
+            --bright-contrast-color-inverse: var(--banana-cream);
+        }
+    }
+
     * {
         box-sizing: border-box;
         -webkit-font-smoothing: antialiased;
@@ -143,7 +161,7 @@ const navLinks = [
         font-smoothing: antialiased;
         font-optical-sizing: auto;
         &:not(h1, h2, h3, h4, h5, h6) {
-            font-family: "Red Hat Text", sans-serif;
+            font-family: "Geist Pixel", sans-serif;
         }
     }
 
@@ -162,15 +180,8 @@ const navLinks = [
     h4,
     h5,
     h6 {
-        font-family: "Red Hat Display", "Trebuchet MS", sans-serif;
-    }
-
-    :root {
-        --bg-color: #0C0C0C;
-
-        @media (prefers-color-scheme: light) {
-            --bg-color: rgb(215, 215, 215);
-        }
+        /* font-family: "Red Hat Display", "Trebuchet MS", sans-serif; */
+        font-family: "Geist Pixel", "Trebuchet MS", sans-serif;
     }
 
     html {
@@ -182,11 +193,53 @@ const navLinks = [
         margin: 0;
         container: body / inline-size;
         height: 100%;
+        position: relative;
 
         & main {
             margin: 0 auto 4rem auto;
             max-width: min(1280px, 90cqw);
             height: 100%;
         }
+
+        &.no-pixel-font {
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
+                font-family: "Red Hat Display", "Trebuchet MS", sans-serif;
+            }
+            :not(h1, h2, h3, h4, h5, h6) {
+                font-family: "Red Hat Text", "Trebuchet MS", sans-serif;
+            }
+        }
     }
 </style>
+
+<script>
+    const prefersNoPixelFont = localStorage.getItem("prefersNoPixelFont") ?? false;
+    const button = document.querySelector('.FontButton');
+    const body = document.querySelector('body');
+    const pixelLabel = "Toggle font. Current font is pixelated style."
+    const nonPixelLabel = "Toggle font. Current font is sans-serif style."
+
+    window.onload = () => {
+        if (prefersNoPixelFont) {
+            body?.classList.add('no-pixel-font')
+        }
+    }
+
+    function handleClick() {
+        body?.classList.toggle('no-pixel-font');
+        if (body?.classList.contains('no-pixel-font')) {
+            button ? button.ariaLabel = nonPixelLabel : null
+            localStorage.setItem("prefersNoPixelFont", "true")
+        } else {
+            button ? button.ariaLabel = pixelLabel : null
+            localStorage.setItem("prefersNoPixelFont", "false")
+        }
+    }
+
+    button?.addEventListener('click', handleClick);    
+</script>

@@ -33,12 +33,13 @@ type JSON = {
 
 <style>
     .NavCard {
-        --shadow-color: #000;
-        --bg-color: yellow;
+        --shadow-color: var(--coffee-bean);
+        --bg-color: var(--banana-cream);
+        --bg-color-hover: color-mix(in srgb, var(--bg-color) 50%, transparent);
     
         @media (prefers-color-scheme: dark) {
-            --shadow-color: white;
-            --bg-color: hotpink;
+            --shadow-color: var(--snow);
+            --bg-color: var(--petal-pink);
         }
         display: flex;
         flex-direction: column;
@@ -53,10 +54,12 @@ type JSON = {
 
         &.current {
             background-color: var(--bg-color);
+            font-weight: bold;
         }
 
         &:hover,
         &:focus-visible {
+            background-color: var(--bg-color-hover);
             box-shadow: 3px 3px 0 0 var(--shadow-color);
             cursor: pointer;
             transform: skew(-1deg, 0);

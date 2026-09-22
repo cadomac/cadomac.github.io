@@ -40,16 +40,6 @@ type JSON = {
     href={href}
     aria-label={href ? `${title}, opens in new tab` : null}
 >
-    <div class="bg-color-swipe">
-        <div class="bg-stripe">
-            <div class="bg-stripe-seg-1" />
-            <div class="bg-stripe-seg-2" />
-            <div class="bg-stripe-seg-3" />
-            <div class="bg-stripe-seg-1" />
-            <div class="bg-stripe-seg-2" />
-            <div class="bg-stripe-seg-3" />
-        </div>
-    </div>
     <h2 class="title">
         {title}
     </h2>
@@ -57,22 +47,56 @@ type JSON = {
 </Tag>
 
 <style>
-    @keyframes scroll-loop {
+    @keyframes hover-circle {
         0% {
-            left: -112%;
+            translate: 0 0;
+        }
+
+        25% {
+            translate: 0px -3px;
+        }
+
+        50% {
+            translate: -3px -3px;
+        }
+
+        75% {
+            translate: -3px 0px;
         }
 
         100% {
-            left: 0%;
+            translate: 0 0;
+        }
+    }
+    @keyframes hover-circle-inverse {
+        0% {
+            box-shadow: 6px 6px 0 0 var(--shadow-color);
+        }
+
+        25% {
+            box-shadow: 6px 9px 0 0 var(--shadow-color);
+        }
+
+        50% {
+            box-shadow: 9px 9px 0 0 var(--shadow-color);
+        }
+
+        75% {
+            box-shadow: 9px 6px 0 0 var(--shadow-color);
+        }
+
+        100% {
+            box-shadow: 6px 6px 0 0 var(--shadow-color);
         }
     }
     .Card {
-        --shadow-color: #000;
-        --bg-color: yellow;
+        --shadow-color: var(--coffee-bean);
+        --bg-color: var(--banana-cream);
     
         @media (prefers-color-scheme: dark) {
-            --shadow-color: white;
-            --bg-color: hotpink;
+            --shadow-color: var(--snow);
+            --bg-color: var(--petal-pink);
+            /* --bg-color: var(--terminal-green); */
         }
         display: flex;
         flex-direction: column;
@@ -96,14 +120,17 @@ type JSON = {
 
         &:hover,
         &:focus-visible {
-            box-shadow: 10px 10px 0 0 var(--shadow-color);
             cursor: pointer;
-            translate: -2px -2px;
+            background-color: var(--bg-color);
             transform: skew(-1deg, 0);
+            @media (prefers-reduced-motion: no-preference) {
+                animation: hover-circle 2s steps(2) infinite, hover-circle-inverse 2s steps(2) infinite;
+            }
 
             .title,
             .desc {
                 transform: skew(-2deg, 0);
+                text-decoration: 4px dashed underline;
             }
 
             .bg-color-swipe {
@@ -118,53 +145,6 @@ type JSON = {
         &:focus-visible {
             outline: 3px dashed var(--shadow-color);
             outline-offset: -6px;
-        }
-
-        .bg-color-swipe {
-            background-color: var(--bg-color);
-            position: absolute;
-            display: block;
-            height: 100%;
-            width: 100%;
-            top: 100%;
-            left: 0;
-            transition: top 0.2s ease;
-            z-index: -1;
-            
-
-            .bg-stripe {
-                display: flex;
-                width: 220%;
-                height: calc(1cqw + 10px);
-                position: absolute;
-                top: calc(82% - 1cqw);
-                left: -100px;
-                gap: 2cqw;
-                animation: scroll-loop 5s linear forwards infinite;
-                
-
-                [class*="seg"] {
-                    background-color: var(--shadow-color);
-                    transform: skew(-34deg, 0);
-                    display: flex;
-                    gap:0;
-
-                    .material-symbols-rounded {
-                        display: block;
-                        width: fit-content;
-                    }
-                }
-                
-                .bg-stripe-seg-1 {
-                    width: 50%;
-                }
-                .bg-stripe-seg-2 {
-                    width: 30%;
-                }
-                .bg-stripe-seg-3 {
-                    width: 20%;
-                }
-            }
         }
 
         .title,

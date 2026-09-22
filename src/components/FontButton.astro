@@ -1,0 +1,61 @@
+<button aria-label="Toggle font. Current font is pixelated style." class="FontButton">
+    Aa
+    <div class="font-tooltip">
+        Toggle font
+        <div class="point"></div>
+    </div>
+</button>
+
+<style>
+    .FontButton {
+        appearance: none;
+        border: none;
+        height: 40px;
+        width: 40px;
+        font-size: 24px;
+        background-color: transparent;
+        color: var(--contrast-color);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        right: 15px;
+        bottom: 15px;
+
+        body.no-pixel-font & {
+            font-family: "Geist Pixel", sans-serif;
+        }
+        body:not(.no-pixel-font) & {
+            font-family: "Red Hat Text", "Trebuchet MS", sans-serif;
+        }
+
+        &:hover,
+        &:focus-visible {
+            .font-tooltip {
+                display: block;
+            }
+        }
+
+        .font-tooltip {
+            background-color: var(--contrast-color);
+            color: var(--contrast-text-color);
+            position: absolute;
+            font-size: 14px;
+            width: 100px;
+            height: 20px;
+            right: 50px;
+            display: none;
+
+            .point {
+                background-color: var(--contrast-color);
+                height: 20px;
+                width: 20px;
+                position: absolute;
+                right: -10px;
+                top: 0;
+                rotate: 45deg;
+                scale: 0.71;
+        }
+    }
+</style>

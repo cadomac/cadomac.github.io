@@ -1,10 +1,53 @@
 ---
 import Layout from "../layouts/Layout.astro";
+
+const links = [
+    {
+        name: "Printables",
+        link: "https://www.printables.com/@bigheadcam"
+    },
+    {
+        name: "GitHub",
+        link: "https://www.github.com/cadomac"
+    },
+    {
+        name: "LinkedIn",
+        link: "https://www.linkedin.com/in/macdonaldcameron"
+    },
+]
 ---
 
 <Layout title="Cameron MacDonald" currentPage="about">
     <div>
-        <h1>about</h1>
-        <p>cameron is a front end developer with a passion for accessibility and whimsical design.</p>
+        <p class="intro-paragraph"><b>cameron</b> is a <b>front end developer</b> with a passion for <b>accessibility</b> and <i class="whimsy-text">whimsical design</i>.</p>
+        <p>when he's not working his day job, you might find him making games, playing games, skiing, reading, drawing, or doing any of his other far-too-numerous hobbies.</p>
+        <p>you can find him on other sites below, in no particular order:</p>
+        <ul>
+            {
+                links && links.map((item) => (
+                    <li><a href={item.link} target="_blank">{item.name}</a></li>
+                ))
+            }
+        </ul>
     </div>
 </Layout>
+
+<style>
+    a {
+        color: var(--bright-contrast-color-inverse);
+        text-decoration: 2px dotted underline;
+
+        &:hover,
+        &:focus-visible {
+            color: var(--contrast-color);
+        }
+        
+        &:focus-visible {
+            outline: 2px dotted var(--bright-contrast-color-inverse);
+        }
+    }
+
+    p {
+        font-size: 20px;
+    }
+</style>

@@ -1,5 +1,6 @@
 ---
 import Nav from './Nav.astro';
+import FontButton from "@components/FontButton.astro"
 
 export interface Props {
   show?: boolean;
@@ -11,30 +12,66 @@ const { show=false, currentPage, navLinks } = Astro.props;
 ---
 
 <header>
-  <a class="home-link" href="/"><h1>cdm</h1></a>
-  <div class="NavWrap">
-    <Nav currentPage={currentPage} navLinks={navLinks} />
+  <div class="left-nav-wrapper">
+    <a class="home-link" href="/"><h1>cdm</h1></a>
+    <div class="NavWrap">
+      <Nav currentPage={currentPage} navLinks={navLinks} />
+    </div>
   </div>
+  <FontButton />
 </header>
 
 <style>
   header {
     display: flex;
     align-items: center;
-    gap: 40px;
+    justify-content: space-between;
     padding: 10px 20px;
-
     @media (max-width: 500px) {
-      gap: 10px;
       flex-direction: column;
       justify-content: center;
     }
+
+    
+    .left-nav-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      @media (max-width: 500px) {
+        gap: 10px;
+        flex-direction: column;
+        justify-content: center;
+      }
+    }
+
+    .FontButton {
+      position: relative;
+      inset: inherit;
+
+      @media (max-width: 500px) {
+        position: fixed;
+        right: 15px;
+        bottom: 5px;
+      }
+    }
   }
   .home-link {
+    --hover-color: var(--banana-cream);
+    @media (prefers-color-scheme: dark) {
+      --hover-color: var(--petal-pink);
+    }
+    background: linear-gradient(transparent, transparent 50%, var(--hover-color) 51%, var(--hover-color));
+    background-size: 100% 200%;
+    background-position: 0 0;
+    transition: background-position 0.3s steps(3);
     text-decoration-style: dashed !important;
     text-decoration-thickness: 4px;
     color: currentColor;
 
+    &:hover,
+    &:focus-visible {
+      background-position: 0 84%;
+    }
     &:focus-visible {
       outline-offset: 0;
       outline-style: dashed;
