@@ -1,6 +1,6 @@
 ---
-import Nav from './Nav.astro';
-import FontButton from "@components/FontButton.astro"
+import Nav from "./Nav.astro";
+import FontButton from "@components/FontButton.astro";
 
 export interface Props {
   show?: boolean;
@@ -8,7 +8,7 @@ export interface Props {
   navLinks: string[];
 }
 
-const { show=false, currentPage, navLinks } = Astro.props;
+const { show = false, currentPage, navLinks } = Astro.props;
 ---
 
 <header>
@@ -32,7 +32,6 @@ const { show=false, currentPage, navLinks } = Astro.props;
       justify-content: center;
     }
 
-    
     .left-nav-wrapper {
       display: flex;
       align-items: center;
@@ -56,14 +55,19 @@ const { show=false, currentPage, navLinks } = Astro.props;
     }
   }
   .home-link {
-    --hover-color: var(--banana-cream);
-    @media (prefers-color-scheme: dark) {
-      --hover-color: var(--petal-pink);
-    }
-    background: linear-gradient(transparent, transparent 50%, var(--hover-color) 51%, var(--hover-color));
+    --hover-color: var(--primary);
+    background: linear-gradient(
+      transparent,
+      transparent 50%,
+      var(--hover-color) 51%,
+      var(--hover-color)
+    );
     background-size: 100% 200%;
     background-position: 0 0;
-    transition: background-position 0.3s steps(3);
+    transition:
+      background-position 0.3s steps(3),
+      color 0.2s ease 0.2s;
+    padding: 3px;
     text-decoration-style: dashed !important;
     text-decoration-thickness: 4px;
     color: currentColor;
@@ -71,10 +75,11 @@ const { show=false, currentPage, navLinks } = Astro.props;
     &:hover,
     &:focus-visible {
       background-position: 0 84%;
+      color: var(--text-color-hover);
     }
     &:focus-visible {
+      outline: 2px dotted var(--contrast-color);
       outline-offset: 0;
-      outline-style: dashed;
     }
     h1 {
       font-size: 20px;

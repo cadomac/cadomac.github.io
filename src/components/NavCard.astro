@@ -4,10 +4,7 @@ export interface Props {
     currentPage: string;
 }
 
-const {
-    title = "card title",
-    currentPage
-} = Astro.props;
+const { title = "card title", currentPage } = Astro.props;
 
 // const id = title.replace(/\s|@|\.|:/g, "");
 
@@ -19,13 +16,9 @@ type JSON = {
         [key: string]: string;
     };
 };
-
 ---
 
-<a
-    class=`NavCard ${currentPage === title && 'current'}`
-    href={`/${title}`}
->
+<a class=`NavCard ${currentPage === title && 'current'}` href={`/${title}`}>
     <span class="title">
         {title}
     </span>
@@ -33,20 +26,18 @@ type JSON = {
 
 <style>
     .NavCard {
-        --shadow-color: var(--coffee-bean);
-        --bg-color: var(--banana-cream);
+        --bg-color: var(--primary);
         --bg-color-hover: color-mix(in srgb, var(--bg-color) 50%, transparent);
-    
-        @media (prefers-color-scheme: dark) {
-            --shadow-color: var(--snow);
-            --bg-color: var(--petal-pink);
-        }
         display: flex;
         flex-direction: column;
         padding: 0 10px;
-        border: 2px solid var(--shadow-color);
-        box-shadow: 2px 2px 0 0 var(--shadow-color);
-        transition: box-shadow 0.1s ease, translate 0.1s ease, transform 0.1s ease, color 0.1s ease;
+        border: 2px solid var(--shadow);
+        box-shadow: 2px 2px 0 0 var(--shadow);
+        transition:
+            box-shadow 0.1s ease,
+            translate 0.1s ease,
+            transform 0.1s ease,
+            color 0.1s ease;
         text-decoration: none;
         color: currentColor;
         position: relative;
@@ -54,13 +45,14 @@ type JSON = {
 
         &.current {
             background-color: var(--bg-color);
+            color: var(--text-color-hover);
             font-weight: bold;
         }
 
         &:hover,
         &:focus-visible {
             background-color: var(--bg-color-hover);
-            box-shadow: 3px 3px 0 0 var(--shadow-color);
+            box-shadow: 3px 3px 0 0 var(--shadow);
             cursor: pointer;
             transform: skew(-1deg, 0);
 
@@ -71,10 +63,10 @@ type JSON = {
         }
 
         &:focus-visible {
-            outline: 3px dashed var(--shadow-color);
+            outline: 3px dotted var(--shadow);
             outline-offset: -6px;
         }
-        
+
         .title {
             display: flex;
             transition: all 0.1s ease;
