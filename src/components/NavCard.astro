@@ -47,6 +47,11 @@ type JSON = {
             background-color: var(--bg-color);
             color: var(--text-color-hover);
             font-weight: bold;
+
+            &:hover,
+            &:focus-visible {
+                color: currentColor;
+            }
         }
 
         &:hover,

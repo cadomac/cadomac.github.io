@@ -4,29 +4,42 @@ import Layout from "../layouts/Layout.astro";
 const links = [
     {
         name: "Printables",
-        link: "https://www.printables.com/@bigheadcam"
+        link: "https://www.printables.com/@bigheadcam",
     },
     {
         name: "GitHub",
-        link: "https://www.github.com/cadomac"
+        link: "https://www.github.com/cadomac",
     },
     {
         name: "LinkedIn",
-        link: "https://www.linkedin.com/in/macdonaldcameron"
+        link: "https://www.linkedin.com/in/macdonaldcameron",
     },
-]
+];
 ---
 
 <Layout title="Cameron MacDonald" currentPage="about">
     <div>
-        <p class="intro-paragraph"><b>cameron</b> is a <b>front end developer</b> with a passion for <b>accessibility</b> and <i class="whimsy-text">whimsical design</i>.</p>
-        <p>when he's not working his day job, you might find him making games, playing games, skiing, reading, drawing, or doing any of his other far-too-numerous hobbies.</p>
+        <p class="intro-paragraph">
+            <b>cameron</b> is a <b>front end developer</b> with a passion for <b
+                >accessibility</b
+            > and <i class="whimsy-text">whimsical design</i>.
+        </p>
+        <p>
+            when he's not working his day job, you might find him making games,
+            playing games, skiing, reading, drawing, or doing any of his other
+            far-too-numerous hobbies.
+        </p>
         <p>you can find him on other sites below, in no particular order:</p>
         <ul>
             {
-                links && links.map((item) => (
-                    <li><a href={item.link} target="_blank">{item.name}</a></li>
-                ))
+                links &&
+                    links.map((item) => (
+                        <li>
+                            <a href={item.link} target="_blank">
+                                {item.name}
+                            </a>
+                        </li>
+                    ))
             }
         </ul>
     </div>
@@ -34,17 +47,24 @@ const links = [
 
 <style>
     a {
-        color: var(--bright-contrast-color-inverse);
+        color: var(--primary);
         text-decoration: 2px dotted underline;
+        padding: 2px;
 
-        &:hover,
-        &:focus-visible {
-            color: var(--contrast-color);
+        &:hover {
+            background-color: var(--primary);
+            color: var(--text-color-hover);
         }
-        
+
         &:focus-visible {
-            outline: 2px dotted var(--bright-contrast-color-inverse);
+            outline: 2px dotted var(--primary);
+            outline-offset: 1px;
         }
+    }
+
+    li {
+        margin-top: 2px;
+        margin-bottom: 2px;
     }
 
     p {
